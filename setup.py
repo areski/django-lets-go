@@ -24,7 +24,7 @@ for dirpath, dirnames, filenames in os.walk('common'):
 
 setup(
     name='switch2bill-common',
-    version='0.1',
+    version='0.2',
     description='Django Common Libs',
     author='Belaid Arezqui',
     author_email='areski@gmail.com',
