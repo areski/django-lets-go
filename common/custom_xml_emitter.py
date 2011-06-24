@@ -25,9 +25,9 @@ class CustomXmlEmitter(Emitter):
         stream = StringIO.StringIO()
         xml = SimplerXMLGenerator(stream, "utf-8")
         xml.startDocument()
-        xml.startElement("response", {})
+        xml.startElement("Response", {})
         self._to_xml(xml, self.construct())
-        xml.endElement("response")
+        xml.endElement("Response")
         xml.endDocument()
         return stream.getvalue()
 
