@@ -7,6 +7,11 @@ from django.utils.xmlutils import SimplerXMLGenerator
 from piston.emitters import Emitter
 from piston.utils import Mimer
 
+try:
+    from settings import API_ALLOWED_IP
+except:
+    API_ALLOWED_IP = ['localhost', '127.0.0.1']
+
 
 class CustomXmlEmitter(Emitter):
     def _to_xml(self, xml, data):
@@ -33,3 +38,23 @@ class CustomXmlEmitter(Emitter):
 
 Emitter.register('custom_xml', CustomXmlEmitter, 'text/xml; charset=utf-8')
 Mimer.register(lambda *a: None, ('text/xml',))
+
+
+class IpAuthentication(object):
+    """IP Authentication handler
+    """
+    def __init__(self, auth_func=authenticate, realm='API'):
+        self.auth_func = auth_func
+        self.realm = realm
+
+    def is_authenticated(self, request):
+        try:
+            API_ALLOWED_IP.index(request.META['REMOTE_ADDR'])
+            return True
+        except:
+            return False
+
+    def challenge(self):
+        resp = HttpResponse("Not Authorized")
+        resp.status_code = 401
+        return resp
