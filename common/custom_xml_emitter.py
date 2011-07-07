@@ -24,7 +24,7 @@ class CustomXmlEmitter(Emitter):
             for key, value in data.iteritems():
                 xml.startElement(key, {})
                 self._to_xml(xml, value)
-                xml.endElement(key)
+                xml.endElement(key.split()[0])
         else:
             xml.characters(smart_unicode(data))
 
