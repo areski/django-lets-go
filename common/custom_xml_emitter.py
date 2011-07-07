@@ -7,6 +7,8 @@ from django.utils.xmlutils import SimplerXMLGenerator
 from piston.emitters import Emitter
 from piston.utils import Mimer
 from django.contrib.auth import authenticate
+from django.http import HttpResponse
+
 try:
     from settings import API_ALLOWED_IP
 except:
