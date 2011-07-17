@@ -8,11 +8,7 @@ from piston.emitters import Emitter
 from piston.utils import Mimer
 from django.contrib.auth import authenticate
 from django.http import HttpResponse
-
-try:
-    from settings import API_ALLOWED_IP
-except:
-    API_ALLOWED_IP = ['localhost', '127.0.0.1']
+from django.conf import settings
 
 
 class CustomXmlEmitter(Emitter):
@@ -51,7 +47,7 @@ class IpAuthentication(object):
 
     def is_authenticated(self, request):
         try:
-            API_ALLOWED_IP.index(request.META['REMOTE_ADDR'])
+            settings.API_ALLOWED_IP.index(request.META['REMOTE_ADDR'])
             return True
         except:
             return False
