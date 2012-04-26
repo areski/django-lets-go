@@ -11,12 +11,18 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 from django.utils.translation import gettext as _
+from inspect import stack, getmodule
 from datetime import *
 from random import *
 import calendar
 import string
 import urllib
 import time
+
+
+def current_view(request):
+    #name = getmodule(stack()[1][0]).__name__
+    return stack()[1][3]
 
 
 #related to date manipulation
