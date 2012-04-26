@@ -24,7 +24,8 @@ import copy
 register = template.Library()
 
 @register.filter()
-def time_in_min(value,arg):
+def time_in_min(value, arg):
+    """Convert value in min or second format"""
     if int(value)!=0:
         if arg == 'min':
             min = int(value / 60)
@@ -42,6 +43,7 @@ def time_in_min(value,arg):
 
 @register.filter()
 def conv_min(value):
+    """Convert value in min:sec format"""
     if int(value)!=0:
         min = int(value / 60)
         sec = int(value % 60)
@@ -52,7 +54,11 @@ def conv_min(value):
 
 @register.filter()
 def month_name(value, arg):
-    month_dict = {1:"Jan",2:"Feb",3:"Mar",4:"Apr", 5:"May",6:"Jun",7:"Jul",8:"Aug",9:"Sep",10:"Oct",11:"Nov",12:"Dec"}
+    """Get month name from 1-12 int no"""
+    month_dict = {1: "Jan", 2: "Feb", 3: "Mar",
+                  4: "Apr", 5: "May", 6:"Jun",
+                  7: "Jul", 8: "Aug", 9: "Sep",
+                  10: "Oct", 11: "Nov", 12: "Dec"}
     no=int(value)
     m_name = month_dict[no]
     return str(m_name) + " " + str(arg)
@@ -66,7 +72,7 @@ def to_json(value):
 @register.inclusion_tag('cdr/sort_link_frag.html', takes_context=True)
 def sort_link(context, link_text, sort_field, visible_name=None):
     """Usage: {% sort_link "link text" "field_name" %}
-    Usage: {% sort_link "link text" "field_name" "Visible name" %}
+       Usage: {% sort_link "link text" "field_name" "Visible name" %}
     """
     is_sorted = False
     sort_order = None
@@ -109,56 +115,11 @@ def sort_link(context, link_text, sort_field, visible_name=None):
             }
 
 
-@register.tag
-def auto_sort(parser, token):
-    "usage: {% auto_sort queryset %}"
-    try:
-        tag_name, queryset = token.split_contents()
-    except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires a single argument" % token.contents.split()[0]
-    return SortedQuerysetNode(queryset)
-
-
-class SortedQuerysetNode(template.Node):
-    def __init__(self, queryset):
-        self.queryset_var = queryset
-        self.queryset = template.Variable(queryset)
-
-    def render(self, context):
-        queryset = self.queryset.resolve(context)
-        if 'request' in context:
-            request = context['request']
-            sort_by = request.GET.get('sort_by')
-            has_visible_name = False
-            if sort_by:
-                if sort_by in [el.name for el in queryset.model._meta.fields]:
-                    queryset = queryset.order_by(sort_by)
-                else:
-                    has_visible_name = True
-                    if sort_by in request.session:
-                        sort_by = request.session[sort_by]
-                        try:
-                            queryset = queryset.order_by(sort_by)
-                        except:
-                            raise
-        context[self.queryset_var] = queryset
-        if 'request' in context:
-            getvars = request.GET.copy()
-        else:
-            getvars = {}
-        if 'sort_by' in getvars:
-            if has_visible_name:
-                context['current_sort_field']= request.session.get(getvars['sort_by']) or getvars['sort_by']
-            else:
-                context['current_sort_field']= getvars['sort_by']
-            del getvars['sort_by']
-        if len(getvars.keys()) > 0:
-            context['getsortvars'] = "&%s" % getvars.urlencode()
-        else:
-            context['getsortvars'] = ''
-        return ''
-
 def get_fieldset(parser, token):
+    """Usage: {% get_fieldset field1,field2 as list_field from xyz_form %}
+              {% for list_field in xyz_form %}
+              {% endfor %}
+    """
     try:
         name, fields, as_, variable_name, from_, form = token.split_contents()
     except ValueError:
@@ -228,7 +189,6 @@ def groupby_columns(seq, n):
 register.filter('conv_min', conv_min)
 register.filter('time_in_min', time_in_min)
 register.filter('month_name', month_name)
-
 register.filter('to_json', to_json)
 register.filter('groupby_rows', groupby_rows)
 register.filter('groupby_columns', groupby_columns)

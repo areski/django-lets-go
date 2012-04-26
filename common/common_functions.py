@@ -114,7 +114,11 @@ def validate_days(year, month, day):
 
 
 def month_year_range():
-    """Get month range list"""
+    """Get month-year range list
+       e.g.
+            2012-03 => March-2012
+            2012-04 => April-2012
+    """
     tday = datetime.today()
     year_actual = tday.year
     YEARS = range(year_actual-1, year_actual+1)
