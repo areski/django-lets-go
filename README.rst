@@ -1,8 +1,8 @@
----------------------------------------------------------------------
-This packages contains common library that are reused by Star2Billing
----------------------------------------------------------------------
+---------------------------------------------------
+Common Libraries / Functions reused by Star2Billing
+---------------------------------------------------
 
-It contains the following script and packages,
+This repository is full of little goodies, some are recompiled from other sources, it contains the following script and packages,
 
 1. Model : intermediate_model_base_class
 
