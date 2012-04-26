@@ -59,6 +59,16 @@ def get_unique_id():
     return ''.join([choice(chars) for i in range(length)])
 
 
+def dictSort(d):
+    """returns a dictionary sorted by keys """
+    our_list = d.items()
+    our_list.sort()
+    k = {}
+    for item in our_list:
+        k[item[0]] = item[1]
+    return k
+
+
 def comp_month_range():
     """Prepare month range list to compare with selected month"""
     word_months = _("months")
