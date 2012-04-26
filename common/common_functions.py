@@ -124,11 +124,11 @@ def month_year_range():
 
 
 # get news from http://cdr-stats.org/news.php
-def get_news():
+def get_news(news_url):
     
     news_final = []
     try :
-        news_handler = urllib.urlopen('http://www.cdr-stats.org/news.php')
+        news_handler = urllib.urlopen(news_url)
         news = news_handler.read()
         news = nl2br(news)
         news = string.split(news, '<br/>')
