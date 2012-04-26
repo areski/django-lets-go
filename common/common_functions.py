@@ -27,6 +27,7 @@ def current_view(request):
 
 #related to date manipulation
 def relative_days(from_day, from_year):
+    """get relative days from day & year (with leap year check)"""
     if from_day == 30:
         relative_days = 2
         return relative_days
@@ -41,7 +42,8 @@ def relative_days(from_day, from_year):
         return relative_days
 
 
-def uniq(inlist):
+def unique_list(inlist):
+    """Prepare unique list"""
     # order preserving
     uniques = []
     for item in inlist:
@@ -58,6 +60,7 @@ def get_unique_id():
 
 
 def comp_month_range():
+    """Prepare month range list to compare with selected month"""
     word_months = _("months")
     word_month = _("month")
     COMP_MONTH_LIST = ( (12, '- 12 ' + word_months),
@@ -77,6 +80,7 @@ def comp_month_range():
 
 
 def comp_day_range():
+    """Prepare day range list to compare with selected day"""
     word_days = _("days")
     word_day = _("day")
     COMP_DAY_LIST = ( (5, '- 5 ' + word_days),
@@ -88,17 +92,20 @@ def comp_day_range():
 
 
 def date_range(start, end):
+    """get date list between two dates"""
     r = (end+timedelta(days=1)-start).days
     return [start+timedelta(days=i) for i in range(r)]
 
 
 def day_range():
+    """Get no of days list"""
     DAYS = range(1, 32)
     days = map(lambda x: (x, x), DAYS)
     return days
 
 
 def validate_days(year, month, day):
+    """validate no of days in given month and year"""
     total_days = calendar.monthrange(year, month)
     if day > total_days[1]:
         return total_days[1]
@@ -107,6 +114,7 @@ def validate_days(year, month, day):
 
 
 def month_year_range():
+    """Get month range list"""
     tday = datetime.today()
     year_actual = tday.year
     YEARS = range(year_actual-1, year_actual+1)
@@ -131,7 +139,7 @@ def month_year_range():
 
 # get news from http://cdr-stats.org/news.php
 def get_news(news_url):
-    
+    """To get news from news url & append into list"""
     news_final = []
     try :
         news_handler = urllib.urlopen(news_url)
@@ -164,6 +172,7 @@ def get_news(news_url):
 
 #variable check with request
 def variable_value(request, field_name):
+    """Check field in POST/GET request and return field value"""
     if request.method == 'GET':
         if field_name in request.GET:
             field_name = request.GET[field_name]
@@ -178,8 +187,12 @@ def variable_value(request, field_name):
 
     return field_name
 
+
 #source_type/destination_type filed check with request
 def source_desti_field_chk(base_field, base_field_type, field_name):
+    """Prepare filters (kwargs{}) for django queryset
+       where fields contain string are checked like exact | startswith | contains | endswith
+    """
     kwargs = {}
     if base_field != '':
         if base_field_type == '1':
@@ -193,8 +206,12 @@ def source_desti_field_chk(base_field, base_field_type, field_name):
 
     return kwargs
 
+
 #source_type/destination_type filed check with request
 def source_desti_field_chk_mongodb(base_field, base_field_type):
+    """Prepare filters (kwargs{}) for django queryset for mongodb
+       where fields contain strings are checked like exact | startswith | contains | endswith
+    """
     q = ''
     base_field = str(base_field)
     if base_field != '':
@@ -211,6 +228,9 @@ def source_desti_field_chk_mongodb(base_field, base_field_type):
 
 #duration filed check with request
 def duration_field_chk_mongodb(base_field, base_field_type):
+    """Prepare filters (kwargs{}) for django queryset
+       where fields contain digits are checked like = | > | >= | < | <=
+    """
     q = ''
     if base_field != '':
         if base_field_type == '1': # =
@@ -233,10 +253,12 @@ def nl2br(s):
 
 
 def reverseString(s):
+    """reverse string"""
     return s[::-1]
 
 
 def int_convert_to_minute(value):
+    """Convert value into min & sec"""
     min = int(int(value) / 60)
     sec = int(int(value) % 60)
     return "%02d" % min + ":" + "%02d" % sec
