@@ -33,4 +33,5 @@ def build_test_suite_from(test_cases):
                 tests.append(item)
         test_suites.append(unittest.TestSuite(map(unittest.TestLoader().\
         loadTestsFromTestCase, tests)))
+
     return unittest.TestSuite(test_suites)

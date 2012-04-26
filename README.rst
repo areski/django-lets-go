@@ -28,4 +28,6 @@ It contains the following script and packages :
         * ``groupby_rows`` - Returns a list of n lists. Each sub-list is the same length
         * ``groupby_rows`` - Returns a list of lists where each sub-list has n items.
 
+    5. build_test_suite_from : Returns a single or group of unittest test suite
+
 
