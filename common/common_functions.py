@@ -25,6 +25,13 @@ def current_view(request):
     return stack()[1][3]
 
 
+def striplist(l):
+    """Take a list of string objects and return the same list
+    stripped of extra whitespace.
+    """
+    return([x.strip() for x in l])
+
+
 #related to date manipulation
 def relative_days(from_day, from_year):
     """get relative days from day & year (with leap year check)"""
