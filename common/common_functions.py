@@ -253,15 +253,15 @@ def duration_field_chk_mongodb(base_field, base_field_type):
     q = ''
     if base_field != '':
         if base_field_type == '1': # =
-            q = int(base_field)
+            q = float(base_field)
         if base_field_type == '2': # >
-            q = {'$gt': int(base_field)}
+            q = {'$gt': float(base_field)}
         if base_field_type == '3': # >=
-            q = {'$gte' : int(base_field)}
+            q = {'$gte' : float(base_field)}
         if base_field_type == '4': # <
-            q = {'$lt' : int(base_field)}
+            q = {'$lt' : float(base_field)}
         if base_field_type == '5': # <=
-            q = {'$lte' : int(base_field)}
+            q = {'$lte' : float(base_field)}
 
     return q
 
