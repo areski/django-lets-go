@@ -96,16 +96,14 @@ def comp_month_range():
     return COMP_MONTH_LIST
 
 
-def comp_day_range():
+def comp_day_range(number_of_days = 5):
     """Prepare day range list to compare with selected day"""
     word_days = _("days")
     word_day = _("day")
-    COMP_DAY_LIST = ( (5, '- 5 ' + word_days),
-                      (4, '- 4 ' + word_days),
-                      (3, '- 3 ' + word_days),
-                      (2, '- 2 ' + word_days),
-                      (1, '- 1 ' + word_day),)
-    return COMP_DAY_LIST
+    DAYS = range(2, number_of_days + 1)
+    days = map(lambda x: (x, "- %d " % x + word_days), DAYS)
+    COMP_DAY_LIST = [(1, '- 1 ' + word_day),]
+    return COMP_DAY_LIST + days
 
 
 def date_range(start, end):
