@@ -26,7 +26,12 @@ register = template.Library()
 @register.filter()
 def time_in_min(value, arg):
     """Convert value in min or second format"""
-    if int(value)!=0:
+    try:
+        value = int(value)
+    except:
+        value = 0
+    
+    if value != 0:
         if arg == 'min':
             min = int(value / 60)
             sec = int(value % 60)
@@ -44,7 +49,12 @@ def time_in_min(value, arg):
 @register.filter()
 def conv_min(value):
     """Convert value in min:sec format"""
-    if int(value)!=0:
+    try:
+        value = int(value)
+    except:
+        value = 0
+    
+    if value != 0:
         min = int(value / 60)
         sec = int(value % 60)
         return "%02d" % min + ":" + "%02d" % sec
