@@ -79,7 +79,7 @@ def to_json(value):
     return mark_safe(simplejson.dumps(value))
 
 
-@register.inclusion_tag('cdr/sort_link_frag.html', takes_context=True)
+@register.inclusion_tag('sort_link_frag.html', takes_context=True)
 def sort_link(context, link_text, sort_field, visible_name=None):
     """Usage: {% sort_link "link text" "field_name" %}
        Usage: {% sort_link "link text" "field_name" "Visible name" %}
