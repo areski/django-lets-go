@@ -12,12 +12,23 @@
 #
 from django.utils.translation import gettext as _
 from inspect import stack, getmodule
-from datetime import *
-from random import *
+from datetime import datetime
+from random import choice
 import calendar
 import string
 import urllib
 import time
+
+
+def pass_gen(char_length, digit_length):
+    """Unique password generator"""
+    #char_length = 2
+    #digit_length = 6
+    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    digit = "1234567890"
+    pass_str_char = ''.join([choice(chars) for i in range(char_length)])
+    pass_str_digit = ''.join([choice(digit) for i in range(digit_length)])
+    return pass_str_char + pass_str_digit
 
 
 def current_view(request):
@@ -296,3 +307,4 @@ def isint( str ):
     except TypeError:
         ok = 0
     return ok
+

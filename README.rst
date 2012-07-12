@@ -10,6 +10,7 @@ This repository is full of little goodies, some are recompiled from other source
 
 3. Common functions :
 
+    * ``pass_gen`` - Unique password generator 
     * ``comp_month_range`` - Prepare month range list to compare with selected month
     * ``comp_day_range`` - Prepare day range list to compare with selected day
     * ``date_range`` - Get date list between two dates
