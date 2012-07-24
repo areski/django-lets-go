@@ -27,6 +27,7 @@ This repository is full of little goodies, some are recompiled from other source
                         Usage: {% get_fieldset field1,field2 as list_field from xyz_form %}
     * ``groupby_rows`` - Returns a list of n lists. Each sub-list is the same length
     * ``groupby_rows`` - Returns a list of lists where each sub-list has n items.
+    * ``listsort`` - Perform sorting on template list
 
     5. build_test_suite_from : Returns a single or group of unittest test suite
 

@@ -62,6 +62,15 @@ def profit_in_percentage(value, arg):
 
 
 @register.filter()
+def cal_width(value, max):
+    """Get width"""
+    if not value or not max:
+        return "None"
+    width = (value / float(max)) * 200
+    return width
+
+
+@register.filter()
 def time_in_min(value, arg):
     """Convert value in min or second format"""
     try:
@@ -234,6 +243,25 @@ def groupby_columns(seq, n):
     return _regroup_table(seq, columns=int(n))
 
 
+@register.filter(name='sort')
+def listsort(value):
+    """Sort list"""
+    if isinstance(value, dict):
+        new_dict = SortedDict()
+        key_list = value.keys()
+        key_list.sort()
+        for key in key_list:
+            new_dict[key] = value[key]
+        return new_dict
+    elif isinstance(value, list):
+        new_list = list(value)
+        new_list.sort()
+        return new_list
+    else:
+        return value
+    listsort.is_safe = True
+
+
 register.filter('mul', mul)
 register.filter('subtract', subtract)
 register.filter('div', div)
@@ -242,6 +270,7 @@ register.filter('profit_in_percentage', profit_in_percentage)
 register.filter('conv_min', conv_min)
 register.filter('time_in_min', time_in_min)
 register.filter('month_name', month_name)
+register.filter('cal_width', cal_width)
 register.filter('to_json', to_json)
 register.filter('groupby_rows', groupby_rows)
 register.filter('groupby_columns', groupby_columns)
