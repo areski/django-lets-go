@@ -23,6 +23,44 @@ import copy
 
 register = template.Library()
 
+
+@register.filter()
+def mul(value, arg):
+    """Multiplication"""
+    return value * arg
+mul.is_safe = True
+
+
+@register.filter()
+def div(value, arg):
+    """Division"""
+    if arg is None:
+        return 0
+    elif arg is 0:
+        return 0
+    else:
+        return value / arg
+
+
+@register.filter()
+def subtract(value, arg):
+    """Subtraction"""
+    return value - arg
+
+
+@register.filter()
+def percent(value):
+    """Percentage with % sign"""
+    return str(round(value * 100, 2)) + " %"
+
+
+@register.filter()
+def profit_in_percentage(value, arg):
+    """Profit Percentage with % sign"""
+    val = value - arg
+    return str(round(val * 100, 2)) + " %"
+
+
 @register.filter()
 def time_in_min(value, arg):
     """Convert value in min or second format"""
@@ -196,6 +234,11 @@ def groupby_columns(seq, n):
     return _regroup_table(seq, columns=int(n))
 
 
+register.filter('mul', mul)
+register.filter('subtract', subtract)
+register.filter('div', div)
+register.filter('percent', percent)
+register.filter('profit_in_percentage', profit_in_percentage)
 register.filter('conv_min', conv_min)
 register.filter('time_in_min', time_in_min)
 register.filter('month_name', month_name)
