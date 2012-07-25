@@ -16,6 +16,7 @@ This repository is full of little goodies, some are recompiled from other source
     * ``date_range`` - Get date list between two dates
     * ``validate_days`` - Validate no of days in given month and year
     * ``get_news`` - Get news from news url
+    * ``only_one`` - decorator for distributed task locking in celery
 
 4. Common Template tags :
 
