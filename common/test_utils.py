@@ -43,16 +43,12 @@ def build_test_suite_from(test_cases):
 
 class BaseAuthenticatedClient(TestCase):
     """Common Authentication"""
+    fixtures = ['auth_user.json']
 
     def setUp(self):
         """To create admin user"""
         self.client = Client()
-        self.user =\
-            User.objects.create_user('admin', 'admin@world.com', 'admin')
-        self.user.is_staff = True
-        self.user.is_superuser = True
-        self.user.is_active = True
-        self.user.save()
+        self.user = User.objects.get(username='admin')
         auth = '%s:%s' % ('admin', 'admin')
         auth = 'Basic %s' % base64.encodestring(auth)
         auth = auth.strip()
