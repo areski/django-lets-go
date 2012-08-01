@@ -12,14 +12,15 @@ if root_dir:
 for dirpath, dirnames, filenames in os.walk('common'):
     # Ignore dirnames that start with '.'
     for i, dirname in enumerate(dirnames):
-        if dirname.startswith('.'): del dirnames[i]
+        if dirname.startswith('.'):
+            del dirnames[i]
     if '__init__.py' in filenames:
         pkg = dirpath.replace(os.path.sep, '.')
         if os.path.altsep:
             pkg = pkg.replace(os.path.altsep, '.')
         packages.append(pkg)
     elif filenames:
-        prefix = dirpath[len('common')+1:] # Strip "dummyapp/" or "dummyapp\"
+        prefix = dirpath[len('common') + 1:]  # Strip "common/"
         for f in filenames:
             data_files.append(os.path.join(prefix, f))
 
