@@ -167,6 +167,11 @@ def month_year_range():
     return m_list
 
 
+def nl2br(s):
+    """Related to string operation"""
+    return '<br/>'.join(s.split('\n'))
+
+
 # get news from http://cdr-stats.org/news.php
 def get_news(news_url):
     """To get news from news url & append into list"""
