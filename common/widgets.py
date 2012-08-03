@@ -37,12 +37,15 @@ class ForeignKeySearchInput(forms.HiddenInput):
                     % (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0])),
             }
         js = (
-            '%s%s/js/jquery-1.7.1.js' % (settings.STATIC_URL,
-                                         settings.STATICFILES_DIRS[0][0]),
-            '%s%s/js/jquery.autocomplete.js' % (settings.STATIC_URL,
-                                                settings.STATICFILES_DIRS[0][0]),
-            '%s%s/js/AutocompleteObjectLookups.js ' % (settings.STATIC_URL,
-                                                       settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/jquery-1.7.1.js' %
+                        (settings.STATIC_URL,
+                        settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/jquery.autocomplete.js' %
+                        (settings.STATIC_URL,
+                        settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/AutocompleteObjectLookups.js ' %
+                        (settings.STATIC_URL,
+                        settings.STATICFILES_DIRS[0][0]),
             )
 
     def label_for_value(self, value):
@@ -131,12 +134,15 @@ class ManyToManySearchInput(forms.MultipleHiddenInput):
                     % (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0])),
             }
         js = (
-            '%s%s/js/jquery-1.4.4.js' % (settings.STATIC_URL,
-                                         settings.STATICFILES_DIRS[0][0]),
-            '%s%s/js/jquery.autocomplete.js' % (settings.STATIC_URL,
-                                                settings.STATICFILES_DIRS[0][0]),
-            '%s%s/js/AutocompleteObjectLookups.js ' % (settings.STATIC_URL,
-                                                       settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/jquery-1.4.4.js' %
+                                (settings.STATIC_URL,
+                                settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/jquery.autocomplete.js' %
+                                (settings.STATIC_URL,
+                                settings.STATICFILES_DIRS[0][0]),
+            '%s%s/js/AutocompleteObjectLookups.js ' %
+                                (settings.STATIC_URL,
+                                settings.STATICFILES_DIRS[0][0]),
             )
 
     def __init__(self, rel, search_fields, attrs=None):
@@ -358,7 +364,8 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
         pk_value = obj._get_pk_val()
 
         msg = _('The %(name)s "%(obj)s" was added.') %\
-              {'name': force_unicode(opts.verbose_name), 'obj': force_unicode(obj)}
+              {'name': force_unicode(opts.verbose_name),
+              'obj': force_unicode(obj)}
         # Here, we distinguish between different save types by checking for
         # the presence of keys in request.POST.
         if "_continue" in request.POST:
@@ -396,7 +403,8 @@ class AutocompleteWidgetWrapper(RelatedFieldWidgetWrapper):
     def render(self, name, value, *args, **kwargs):
         rel_to = self.rel.to
         related_url = '../../../%s/%s/' %\
-                      (rel_to._meta.app_label, rel_to._meta.object_name.lower())
+                        (rel_to._meta.app_label,
+                        rel_to._meta.object_name.lower())
         self.widget.choices = self.choices
         output = [self.widget.render(name, value, *args, **kwargs)]
         if rel_to in self.admin_site._registry:

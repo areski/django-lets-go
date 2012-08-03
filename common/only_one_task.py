@@ -1,8 +1,7 @@
-import redis
-
-REDIS_CLIENT = redis.Redis()
-
 #code from http://loose-bits.com/2010/10/distributed-task-locking-in-celery.html
+
+import redis
+REDIS_CLIENT = redis.Redis()
 
 
 def only_one(function=None, key="", timeout=None):

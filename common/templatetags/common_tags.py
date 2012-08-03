@@ -12,13 +12,8 @@
 #
 from django import template
 from django.template.defaultfilters import *
-from django.core.serializers import serialize
-from django.db.models.query import QuerySet
 from django.utils import simplejson
-from django.utils.translation import gettext as _
 from django.utils.datastructures import SortedDict
-from datetime import datetime
-import operator
 import copy
 
 register = template.Library()
@@ -77,7 +72,6 @@ def time_in_min(value, arg):
         value = int(value)
     except:
         value = 0
-    
     if value != 0:
         if arg == 'min':
             min = int(value / 60)
@@ -100,7 +94,7 @@ def conv_min(value):
         value = int(value)
     except:
         value = 0
-    
+
     if value != 0:
         min = int(value / 60)
         sec = int(value % 60)
@@ -113,10 +107,10 @@ def conv_min(value):
 def month_name(value, arg):
     """Get month name from 1-12 int no"""
     month_dict = {1: "Jan", 2: "Feb", 3: "Mar",
-                  4: "Apr", 5: "May", 6:"Jun",
+                  4: "Apr", 5: "May", 6: "Jun",
                   7: "Jul", 8: "Aug", 9: "Sep",
                   10: "Oct", 11: "Nov", 12: "Dec"}
-    no=int(value)
+    no = int(value)
     m_name = month_dict[no]
     return str(m_name) + " " + str(arg)
 
@@ -135,12 +129,12 @@ def sort_link(context, link_text, sort_field, visible_name=None):
     sort_order = None
     orig_sort_field = sort_field
     if context.get('current_sort_field') == sort_field:
-        sort_field = '-%s'%sort_field
-        visible_name = '-%s'%(visible_name or orig_sort_field)
+        sort_field = '-%s' % sort_field
+        visible_name = '-%s' % (visible_name or orig_sort_field)
         is_sorted = True
         sort_order = 'down'
-    elif context.get('current_sort_field') == '-'+sort_field:
-        visible_name = '%s'%(visible_name or orig_sort_field)
+    elif context.get('current_sort_field') == '-' + sort_field:
+        visible_name = '%s' % (visible_name or orig_sort_field)
         is_sorted = True
         sort_order = 'up'
 
@@ -166,9 +160,9 @@ def sort_link(context, link_text, sort_field, visible_name=None):
         else:
             extra_vars = ''
 
-
-    return {'link_text':link_text, 'sort_field':sort_field, 'extra_vars':extra_vars,
-            'sort_order':sort_order, 'is_sorted':is_sorted, 'visible_name':visible_name
+    return {'link_text': link_text, 'sort_field': sort_field,
+            'extra_vars': extra_vars, 'sort_order': sort_order,
+            'is_sorted': is_sorted, 'visible_name': visible_name
             }
 
 
@@ -180,7 +174,8 @@ def get_fieldset(parser, token):
     try:
         name, fields, as_, variable_name, from_, form = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError('bad arguments for %r'  % token.split_contents()[0])
+        raise template.TemplateSyntaxError('bad arguments for %r' %
+                token.split_contents()[0])
 
     return FieldSetNode(fields.split(','), variable_name, form)
 
@@ -197,10 +192,10 @@ class FieldSetNode(template.Node):
 
         form = template.Variable(self.form_variable).resolve(context)
         new_form = copy.copy(form)
-        new_form.fields = SortedDict([(key, value) for key, value in form.fields.items() if key in self.fields])
+        new_form.fields = SortedDict([(key, value) \
+                for key, value in form.fields.items() if key in self.fields])
 
         context[self.variable_name] = new_form
-
         return u''
 
 
