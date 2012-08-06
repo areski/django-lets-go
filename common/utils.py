@@ -13,6 +13,7 @@
 
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
+from django.test.client import RequestFactory
 import base64
 import unittest
 
@@ -57,3 +58,5 @@ class BaseAuthenticatedClient(TestCase):
             }
         login = self.client.login(username='admin', password='admin')
         self.assertTrue(login)
+        self.factory = RequestFactory()
+

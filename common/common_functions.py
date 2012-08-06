@@ -46,7 +46,11 @@ def striplist(l):
 
 #related to date manipulation
 def relative_days(from_day, from_year):
-    """get relative days from day & year (with leap year check)"""
+    """get relative days from day & year (with leap year check)
+
+    >>> relative_days(30, 2012)
+    2
+    """
     if from_day == 30:
         relative_days = 2
         return relative_days
