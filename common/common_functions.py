@@ -188,23 +188,23 @@ def validate_days(year, month, day):
         return day
 
 
-def month_year_range():
+def month_year_range(enter_date):
     """Get month-year range list
        e.g.
             2012-03 => March-2012
             2012-04 => April-2012
 
-    >>> month_year_range()
+    >>> enter_date = datetime(2012, 8, 1)
+    >>> month_year_range(enter_date)
     [('2012-08', 'August-2012'), ('2012-07', 'July-2012'), ('2012-06', 'June-2012'), ('2012-05', 'May-2012'), ('2012-04', 'April-2012'), ('2012-03', 'March-2012'), ('2012-02', 'February-2012'), ('2012-01', 'January-2012'), ('2011-12', 'December-2011'), ('2011-11', 'November-2011'), ('2011-10', 'October-2011'), ('2011-09', 'September-2011'), ('2011-08', 'August-2011'), ('2011-07', 'July-2011'), ('2011-06', 'June-2011'), ('2011-05', 'May-2011'), ('2011-04', 'April-2011'), ('2011-03', 'March-2011'), ('2011-02', 'February-2011'), ('2011-01', 'January-2011')]
     """
-    tday = datetime.today()
-    year_actual = tday.year
+    year_actual = enter_date.year
     YEARS = range(year_actual - 1, year_actual + 1)
     YEARS.reverse()
     m_list = []
     for n in YEARS:
         if year_actual == n:
-            month_no = tday.month + 1
+            month_no = enter_date.month + 1
         else:
             month_no = 13
         months_list = range(1, month_no)

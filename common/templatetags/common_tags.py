@@ -21,14 +21,22 @@ register = template.Library()
 
 @register.filter()
 def mul(value, arg):
-    """Multiplication"""
+    """Multiplication
+
+    >>> mul(2, 2)
+    4
+    """
     return value * arg
 mul.is_safe = True
 
 
 @register.filter()
 def div(value, arg):
-    """Division"""
+    """Division
+
+    >>> div(4, 2)
+    2
+    """
     if arg is None:
         return 0
     elif arg is 0:
@@ -39,26 +47,42 @@ def div(value, arg):
 
 @register.filter()
 def subtract(value, arg):
-    """Subtraction"""
+    """Subtraction
+
+    >>> subtract(4, 2)
+    2
+    """
     return value - arg
 
 
 @register.filter()
 def percent(value):
-    """Percentage with % sign"""
+    """Percentage with % sign
+
+    >>> percent(1)
+    '100.0 %'
+    """
     return str(round(value * 100, 2)) + " %"
 
 
 @register.filter()
 def profit_in_percentage(value, arg):
-    """Profit Percentage with % sign"""
+    """Profit Percentage with % sign
+
+    >>> profit_in_percentage(2, 1)
+    '100.0 %'
+    """
     val = value - arg
     return str(round(val * 100, 2)) + " %"
 
 
 @register.filter()
 def cal_width(value, max):
-    """Get width"""
+    """Get width
+
+    >>> cal_width(70, 100)
+    140.0
+    """
     if not value or not max:
         return "None"
     width = (value / float(max)) * 200
@@ -67,7 +91,14 @@ def cal_width(value, max):
 
 @register.filter()
 def time_in_min(value, arg):
-    """Convert value in min or second format"""
+    """Convert value in min or second format
+
+    >>> time_in_min(130, 'min')
+    '02:10 min'
+
+    >>> time_in_min(130, 'sec')
+    '130 sec'
+    """
     try:
         value = int(value)
     except:
@@ -76,20 +107,24 @@ def time_in_min(value, arg):
         if arg == 'min':
             min = int(value / 60)
             sec = int(value % 60)
-            return "%02d" % min + ":" + "%02d" % sec + "min"
+            return "%02d" % min + ":" + "%02d" % sec + " min"
         else:
             min = int(value / 60)
             min = (min * 60)
             sec = int(value % 60)
             total_sec = min + sec
-            return str(total_sec + " sec")
+            return str(total_sec) + " sec"
     else:
         return str("00:00 min")
 
 
 @register.filter()
 def conv_min(value):
-    """Convert value in min:sec format"""
+    """Convert value in min:sec format
+
+    >>> conv_min(130)
+    '02:10'
+    """
     try:
         value = int(value)
     except:
@@ -105,7 +140,11 @@ def conv_min(value):
 
 @register.filter()
 def month_name(value, arg):
-    """Get month name from 1-12 int no"""
+    """Get month name from 1-12 int no
+
+    >>> month_name(2, 1)
+    'Feb 1'
+    """
     month_dict = {1: "Jan", 2: "Feb", 3: "Mar",
                   4: "Apr", 5: "May", 6: "Jun",
                   7: "Jul", 8: "Aug", 9: "Sep",
