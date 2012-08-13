@@ -279,7 +279,13 @@ def groupby_columns(seq, n):
 
 @register.filter(name='sort')
 def listsort(value):
-    """Sort list"""
+    """Sort list
+
+    >>> value = {'a': 1, 'c': 3, 'd': 4, 'b': 2}
+
+    >>> listsort(value)
+    {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+    """
     if isinstance(value, dict):
         new_dict = SortedDict()
         key_list = value.keys()
