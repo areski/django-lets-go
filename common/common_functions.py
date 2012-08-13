@@ -40,6 +40,11 @@ def current_view(request):
 def striplist(l):
     """Take a list of string objects and return the same list
     stripped of extra whitespace.
+
+    >>> l = [1, 2, 3]
+
+    >>> striplist(l)
+    [1, 2, 3]
     """
     return([x.strip() for x in l])
 
@@ -66,7 +71,13 @@ def relative_days(from_day, from_year):
 
 
 def unique_list(inlist):
-    """Prepare unique list"""
+    """Prepare unique list
+
+    >>> inlist = [1, 1, 2, 4, 5, 5, 6]
+
+    >>> unique_list(inlist)
+    [1, 2, 4, 5, 6]
+    """
     # order preserving
     uniques = []
     for item in inlist:
@@ -83,7 +94,13 @@ def get_unique_id():
 
 
 def dictSort(d):
-    """returns a dictionary sorted by keys """
+    """returns a dictionary sorted by keys
+
+    >>> d = {"a": "1", "b": "3", "c": "2"}
+
+    >>> dictSort(d)
+    {'a': '1', 'c': '2', 'b': '3'}
+    """
     our_list = d.items()
     our_list.sort()
     k = {}
@@ -93,7 +110,11 @@ def dictSort(d):
 
 
 def comp_month_range():
-    """Prepare month range list to compare with selected month"""
+    """Prepare month range list to compare with selected month
+
+    >>> comp_month_range()
+    ((12, '- 12 months'), (11, '- 11 months'), (10, '- 10 months'), (9, '- 9 months'), (8, '- 8 months'), (7, '- 7 months'), (6, '- 6 months'), (5, '- 5 months'), (4, '- 4 months'), (3, '- 3 months'), (2, '- 2 months'), (1, '- 1 month'))
+    """
     word_months = _("months")
     word_month = _("month")
     COMP_MONTH_LIST = (
@@ -114,7 +135,11 @@ def comp_month_range():
 
 
 def comp_day_range(number_of_days=5):
-    """Prepare day range list to compare with selected day"""
+    """Prepare day range list to compare with selected day
+
+    >>> comp_day_range(5)
+    [(1, '- 1 day'), (2, '- 2 days'), (3, '- 3 days'), (4, '- 4 days'), (5, '- 5 days')]
+    """
     word_days = _("days")
     word_day = _("day")
     DAYS = range(2, number_of_days + 1)
@@ -124,20 +149,38 @@ def comp_day_range(number_of_days=5):
 
 
 def date_range(start, end):
-    """get date list between two dates"""
+    """get date list between two dates
+
+    >>> start = datetime(2012, 8, 12, 0, 0, 0, 0)
+
+    >>> end = datetime(2012, 8, 15 , 23, 59, 59)
+
+    >>> date_range(start, end)
+    [datetime.datetime(2012, 8, 12, 0, 0), datetime.datetime(2012, 8, 13, 0, 0), datetime.datetime(2012, 8, 14, 0, 0), datetime.datetime(2012, 8, 15, 0, 0)]
+    """
     r = (end + timedelta(days=1) - start).days
     return [start + timedelta(days=i) for i in range(r)]
 
 
 def day_range():
-    """Get no of days list"""
+    """Get no of days list
+
+    >>> day_range()
+    [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12), (13, 13), (14, 14), (15, 15), (16, 16), (17, 17), (18, 18), (19, 19), (20, 20), (21, 21), (22, 22), (23, 23), (24, 24), (25, 25), (26, 26), (27, 27), (28, 28), (29, 29), (30, 30), (31, 31)]
+    """
     DAYS = range(1, 32)
     days = map(lambda x: (x, x), DAYS)
     return days
 
 
 def validate_days(year, month, day):
-    """validate no of days in given month and year"""
+    """validate no of days in given month and year
+
+    >>> validate_days(2012, 8, 31)
+    31
+    >>> validate_days(2012, 8, 32)
+    31
+    """
     total_days = calendar.monthrange(year, month)
     if day > total_days[1]:
         return total_days[1]
@@ -150,6 +193,9 @@ def month_year_range():
        e.g.
             2012-03 => March-2012
             2012-04 => April-2012
+
+    >>> month_year_range()
+    [('2012-08', 'August-2012'), ('2012-07', 'July-2012'), ('2012-06', 'June-2012'), ('2012-05', 'May-2012'), ('2012-04', 'April-2012'), ('2012-03', 'March-2012'), ('2012-02', 'February-2012'), ('2012-01', 'January-2012'), ('2011-12', 'December-2011'), ('2011-11', 'November-2011'), ('2011-10', 'October-2011'), ('2011-09', 'September-2011'), ('2011-08', 'August-2011'), ('2011-07', 'July-2011'), ('2011-06', 'June-2011'), ('2011-05', 'May-2011'), ('2011-04', 'April-2011'), ('2011-03', 'March-2011'), ('2011-02', 'February-2011'), ('2011-01', 'January-2011')]
     """
     tday = datetime.today()
     year_actual = tday.year
@@ -174,7 +220,11 @@ def month_year_range():
 
 
 def nl2br(s):
-    """Related to string operation"""
+    """Related to string operation
+
+    >>> nl2br('abc\nxyz')
+    'abc<br/>xyz'
+    """
     return '<br/>'.join(s.split('\n'))
 
 
@@ -289,25 +339,34 @@ def duration_field_chk_mongodb(base_field, base_field_type):
     return q
 
 
-#related to string operation
-def nl2br(s):
-    return '<br/>'.join(s.split('\n'))
-
-
 def reverseString(s):
-    """reverse string"""
+    """reverse string
+
+    >>> reverseString('abc')
+    'cba'
+    """
     return s[::-1]
 
 
 def int_convert_to_minute(value):
-    """Convert value into min & sec"""
+    """Convert value into min & sec
+
+    >>> int_convert_to_minute(123)
+    '02:03'
+    """
     min = int(int(value) / 60)
     sec = int(int(value) % 60)
     return "%02d" % min + ":" + "%02d" % sec
 
 
 def isint(str):
-    """ Is the given string an integer """
+    """ Is the given string an integer
+
+    >>> isint(str('1234'))
+    1
+    >>> isint(str('11a'))
+    0
+    """
     ok = 1
     if not str:
         return 0
