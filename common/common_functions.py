@@ -283,6 +283,18 @@ def source_desti_field_chk(base_field, base_field_type, field_name):
     """Prepare filters (kwargs{}) for django queryset
        where fields contain string are checked like
        exact | startswith | contains | endswith
+
+    >>> source_desti_field_chk(21, '1', 'contact')
+    {'contact__exact': 21}
+
+    >>> source_desti_field_chk(21, '2', 'contact')
+    {'contact__startswith': 21}
+
+    >>> source_desti_field_chk(21, '3', 'contact')
+    {'contact__contains': 21}
+
+    >>> source_desti_field_chk(21, '4', 'contact')
+    {'contact__endswith': 21}
     """
     kwargs = {}
     if base_field != '':
@@ -294,7 +306,6 @@ def source_desti_field_chk(base_field, base_field_type, field_name):
             kwargs[field_name + '__contains'] = base_field
         if base_field_type == '4':
             kwargs[field_name + '__endswith'] = base_field
-
     return kwargs
 
 
@@ -303,6 +314,15 @@ def source_desti_field_chk_mongodb(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset for mongodb
        where fields contain strings are checked like
        exact | startswith | contains | endswith
+
+    >>> source_desti_field_chk_mongodb(21, '1')
+    '21'
+    >>> source_desti_field_chk_mongodb(21, '2')
+    {'$regex': '^21'}
+    >>> source_desti_field_chk_mongodb(21, '3')
+    {'$regex': '.*21.*'}
+    >>> source_desti_field_chk_mongodb(21, '4')
+    {'$regex': '21$'}
     """
     q = ''
     base_field = str(base_field)
@@ -321,7 +341,16 @@ def source_desti_field_chk_mongodb(base_field, base_field_type):
 #duration filed check with request
 def duration_field_chk_mongodb(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset
-       where fields contain digits are checked like = | > | >= | < | <=
+    where fields contain digits are checked like = | > | >= | < | <=
+
+    >>> duration_field_chk_mongodb(10, '1')
+    10.0
+    >>> duration_field_chk_mongodb(10, '2')
+    {'$gt': 10.0}
+    >>> duration_field_chk_mongodb(10, '3')
+    {'$gte': 10.0}
+    >>> duration_field_chk_mongodb(10, '4')
+    {'$lt': 10.0}
     """
     q = ''
     if base_field != '':
@@ -335,7 +364,6 @@ def duration_field_chk_mongodb(base_field, base_field_type):
             q = {'$lt': float(base_field)}
         if base_field_type == '5':  # <=
             q = {'$lte': float(base_field)}
-
     return q
 
 
