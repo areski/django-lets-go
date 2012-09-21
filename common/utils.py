@@ -16,6 +16,7 @@ from django.test import TestCase, Client
 from django.test.client import RequestFactory
 import base64
 import unittest
+import inspect
 
 
 def build_test_suite_from(test_cases):
@@ -59,4 +60,23 @@ class BaseAuthenticatedClient(TestCase):
         login = self.client.login(username='admin', password='admin')
         self.assertTrue(login)
         self.factory = RequestFactory()
+
+
+class Choice(object):
+
+    class __metaclass__(type):
+        def __init__(self, name, type, other):
+            self._data = []
+            for name, value in inspect.getmembers(self):
+                if not name.startswith("_") and not inspect.isfunction(value):
+                    if isinstance(value, tuple) and len(value) > 1:
+                        data = value
+                    else:
+                        data = (value, " ".join([x.capitalize() for x in name.split("_")]),)
+                    self._data.append(data)
+                    setattr(self, name, data[0])
+
+        def __iter__(self):
+            for value, data in self._data:
+                yield value, data
 
