@@ -65,18 +65,25 @@ class BaseAuthenticatedClient(TestCase):
 class Choice(object):
 
     class __metaclass__(type):
-        def __init__(self, name, type, other):
+        def __init__(self, *args, **kwargs):
             self._data = []
             for name, value in inspect.getmembers(self):
-                if not name.startswith("_") and not inspect.isfunction(value):
+                if not name.startswith('_') and not inspect.ismethod(value):
                     if isinstance(value, tuple) and len(value) > 1:
                         data = value
                     else:
-                        data = (value, " ".join([x.capitalize() for x in name.split("_")]),)
+                        pieces = [x.capitalize() for x in name.split('_')]
+                        data = (value, ' '.join(pieces))
                     self._data.append(data)
                     setattr(self, name, data[0])
+
+            self._hash = dict(self._data)
 
         def __iter__(self):
             for value, data in self._data:
                 yield value, data
+
+        @classmethod
+        def get_value(self, key):
+            return self._hash[key]
 
