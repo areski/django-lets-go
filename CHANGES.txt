@@ -1,0 +1,7 @@
+Changelog
+=========
+
+2.1.0 (2012-10-04)
+------------------
+
+* Import project to Pypi
