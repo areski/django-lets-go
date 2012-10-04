@@ -1,4 +1,5 @@
 global-exclude *.pyc
 include README.rst
 include COPYING
+include requirements.txt
 recursive-include common *.py
