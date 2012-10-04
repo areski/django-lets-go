@@ -10,6 +10,7 @@
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
 #
+
 from django.utils.translation import gettext as _
 from inspect import stack
 from datetime import datetime
@@ -22,8 +23,6 @@ import urllib
 
 def pass_gen(char_length, digit_length):
     """Unique password generator"""
-    #char_length = 2
-    #digit_length = 6
     chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     digit = "1234567890"
     pass_str_char = ''.join([choice(chars) for i in range(char_length)])

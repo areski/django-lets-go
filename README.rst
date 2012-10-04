@@ -1,6 +1,16 @@
----------------------------------------------------
-Common Libraries / Functions reused by Star2Billing
----------------------------------------------------
+==============================
+Django/Python Common Libraries
+==============================
+
+
+General
+-------
+
+This is used in few projects build by Star2Billing (http://www.star2billing.com)
+
+
+What can you find ?
+-------------------
 
 This repository is full of little goodies, some are recompiled from other sources, it contains the following script and packages,
 
@@ -10,7 +20,7 @@ This repository is full of little goodies, some are recompiled from other source
 
 3. Common functions :
 
-    * ``pass_gen`` - Unique password generator 
+    * ``pass_gen`` - Unique password generator
     * ``comp_month_range`` - Prepare month range list to compare with selected month
     * ``comp_day_range`` - Prepare day range list to compare with selected day
     * ``date_range`` - Get date list between two dates
@@ -33,3 +43,28 @@ This repository is full of little goodies, some are recompiled from other source
     5. build_test_suite_from : Returns a single or group of unittest test suite
 
 
+Installation
+------------
+
+1. Install using the sources ::
+
+    pip install -r requirements.txt
+    python setup.py install
+
+
+2. Install with PIP ::
+
+    python install switch2bill-common
+
+
+License
+-------
+
+MPL V2.0 License
+Copyright (C) 2011-2012 Star2Billing S.L.
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this file,
+You can obtain one at http://mozilla.org/MPL/2.0/.
+
+The Initial Developer is Arezqui Belaid <info@star2billing.com>
