@@ -1,18 +1,18 @@
-==============================
-Django/Python Common Libraries
-==============================
+============================
+Django/Python Common Helpers
+============================
 
 
-General
--------
-
-This is used in few projects build by Star2Billing (http://www.star2billing.com)
+Switch2Bill-Common provide a set of helpers built by Star2Billing (http://www.star2billing.com)
+which are used in a subset of their open source projects.
 
 
 What can you find ?
 -------------------
 
-This repository is full of little goodies, some are recompiled from other sources, it contains the following script and packages,
+This repository is full of goodies, some are useful snippets recompiled.
+
+It contains the following helper mainly related to Django :
 
 1. Model : intermediate_model_base_class
 
