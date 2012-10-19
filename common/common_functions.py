@@ -308,19 +308,18 @@ def source_desti_field_chk(base_field, base_field_type, field_name):
     return kwargs
 
 
-#source_type/destination_type filed check with request
-def mongodb_collection_filter(base_field, base_field_type):
+def mongodb_str_filter(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset for mongodb
        where fields contain strings are checked like
        exact | startswith | contains | endswith
 
-    >>> mongodb_collection_filter(21, '1')
+    >>> mongodb_str_filter(21, '1')
     '21'
-    >>> mongodb_collection_filter(21, '2')
+    >>> mongodb_str_filter(21, '2')
     {'$regex': '^21'}
-    >>> mongodb_collection_filter(21, '3')
+    >>> mongodb_str_filter(21, '3')
     {'$regex': '.*21.*'}
-    >>> mongodb_collection_filter(21, '4')
+    >>> mongodb_str_filter(21, '4')
     {'$regex': '21$'}
     """
     q = ''
@@ -337,18 +336,17 @@ def mongodb_collection_filter(base_field, base_field_type):
     return q
 
 
-#duration filed check with request
-def mongodb_collection_duration_filter(base_field, base_field_type):
+def mongodb_int_filter(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset
     where fields contain digits are checked like = | > | >= | < | <=
 
-    >>> mongodb_collection_duration_filter(10, '1')
+    >>> mongodb_int_filter(10, '1')
     10.0
-    >>> mongodb_collection_duration_filter(10, '2')
+    >>> mongodb_int_filter(10, '2')
     {'$gt': 10.0}
-    >>> mongodb_collection_duration_filter(10, '3')
+    >>> mongodb_int_filter(10, '3')
     {'$gte': 10.0}
-    >>> mongodb_collection_duration_filter(10, '4')
+    >>> mongodb_int_filter(10, '4')
     {'$lt': 10.0}
     """
     q = ''
