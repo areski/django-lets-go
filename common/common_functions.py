@@ -338,17 +338,17 @@ def mongodb_collection_filter(base_field, base_field_type):
 
 
 #duration filed check with request
-def duration_field_chk_mongodb(base_field, base_field_type):
+def mongodb_collection_duration_filter(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset
     where fields contain digits are checked like = | > | >= | < | <=
 
-    >>> duration_field_chk_mongodb(10, '1')
+    >>> mongodb_collection_duration_filter(10, '1')
     10.0
-    >>> duration_field_chk_mongodb(10, '2')
+    >>> mongodb_collection_duration_filter(10, '2')
     {'$gt': 10.0}
-    >>> duration_field_chk_mongodb(10, '3')
+    >>> mongodb_collection_duration_filter(10, '3')
     {'$gte': 10.0}
-    >>> duration_field_chk_mongodb(10, '4')
+    >>> mongodb_collection_duration_filter(10, '4')
     {'$lt': 10.0}
     """
     q = ''
