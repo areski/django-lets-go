@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+2.1.3 (2012-10-19)
+------------------
+
+* rename function mongodb_collection_duration_filter to mongodb_int_filter
+* rename mongodb_collection_filter to mongodb_str_filter
+
+
 2.1.0 (2012-10-04)
 ------------------
 
