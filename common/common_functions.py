@@ -309,18 +309,18 @@ def source_desti_field_chk(base_field, base_field_type, field_name):
 
 
 #source_type/destination_type filed check with request
-def source_desti_field_chk_mongodb(base_field, base_field_type):
+def mongodb_collection_filter(base_field, base_field_type):
     """Prepare filters (kwargs{}) for django queryset for mongodb
        where fields contain strings are checked like
        exact | startswith | contains | endswith
 
-    >>> source_desti_field_chk_mongodb(21, '1')
+    >>> mongodb_collection_filter(21, '1')
     '21'
-    >>> source_desti_field_chk_mongodb(21, '2')
+    >>> mongodb_collection_filter(21, '2')
     {'$regex': '^21'}
-    >>> source_desti_field_chk_mongodb(21, '3')
+    >>> mongodb_collection_filter(21, '3')
     {'$regex': '.*21.*'}
-    >>> source_desti_field_chk_mongodb(21, '4')
+    >>> mongodb_collection_filter(21, '4')
     {'$regex': '21$'}
     """
     q = ''
