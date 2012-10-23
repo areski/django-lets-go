@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+2.2.0 (2012-10-23)
+------------------
+
+* add ceil_strdate function - Convert a string date to either a start or end day date
+
+
 2.1.3 (2012-10-19)
 ------------------
 
