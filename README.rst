@@ -26,7 +26,8 @@ It contains the following helper mainly related to Django :
     * ``date_range`` - Get date list between two dates
     * ``validate_days`` - Validate no of days in given month and year
     * ``get_news`` - Get news from news url
-    * ``only_one`` - decorator for distributed task locking in celery
+    * ``only_one`` - Decorator for distributed task locking in celery
+    * ``ceil_strdate`` - Convert a string date to either a start or end day date
 
 4. Common Template tags :
 

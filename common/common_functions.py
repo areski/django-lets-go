@@ -402,3 +402,13 @@ def isint(str):
     except TypeError:
         ok = 0
     return ok
+
+
+def ceil_strdate(str_date, start):
+    """convert a string date to either a start or end day date"""
+    if start == 'start':
+        return datetime(int(str_date[0:4]), int(str_date[5:7]),
+            int(str_date[8:10]), 0, 0, 0, 0)
+    else:
+        return datetime(int(str_date[0:4]), int(str_date[5:7]),
+            int(str_date[8:10]), 23, 59, 59, 999999)
