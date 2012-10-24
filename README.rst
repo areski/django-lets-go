@@ -20,7 +20,7 @@ It contains the following helper mainly related to Django :
 
 3. Common functions :
 
-    * ``get_unique_code`` - Get unique code
+    * ``get_unique_code`` - Generate unique code
     * ``pass_gen`` - Unique password generator
     * ``comp_month_range`` - Prepare month range list to compare with selected month
     * ``comp_day_range`` - Prepare day range list to compare with selected day
