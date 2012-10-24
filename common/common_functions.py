@@ -21,6 +21,12 @@ import string
 import urllib
 
 
+def get_unique_code(length):
+    """Get unique code"""
+    chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    return ''.join([choice(chars) for i in range(length)])
+
+
 def pass_gen(char_length, digit_length):
     """Unique password generator"""
     chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
