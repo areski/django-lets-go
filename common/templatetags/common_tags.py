@@ -11,6 +11,7 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 from django import template
+#TODO: Remove wildcard *
 from django.template.defaultfilters import *
 from django.utils import simplejson
 from django.utils.datastructures import SortedDict
@@ -240,6 +241,7 @@ class FieldSetNode(template.Node):
 
 class ArgumentError(ValueError):
     """Missing or incompatible argument."""
+
 
 def _regroup_table(seq, rows=None, columns=None):
     if not (rows or columns):

@@ -41,6 +41,7 @@ It contains the following helper mainly related to Django :
     * ``groupby_rows`` - Returns a list of n lists. Each sub-list is the same length
     * ``groupby_rows`` - Returns a list of lists where each sub-list has n items.
     * ``listsort`` - Perform sorting on template list
+    * ``convert_to_int`` - Convert value to interger
 
     5. build_test_suite_from : Returns a single or group of unittest test suite
 
