@@ -19,7 +19,7 @@ import copy
 register = template.Library()
 
 
-@register.filter()
+@register.filter(name='mul')
 def mul(value, arg):
     """Multiplication
 
@@ -30,7 +30,7 @@ def mul(value, arg):
 mul.is_safe = True
 
 
-@register.filter()
+@register.filter(name='div')
 def div(value, arg):
     """Division
 
@@ -45,7 +45,7 @@ def div(value, arg):
         return value / arg
 
 
-@register.filter()
+@register.filter(name='subtract')
 def subtract(value, arg):
     """Subtraction
 
@@ -55,7 +55,7 @@ def subtract(value, arg):
     return value - arg
 
 
-@register.filter()
+@register.filter(name='percent')
 def percent(value):
     """Percentage with % sign
 
@@ -65,7 +65,7 @@ def percent(value):
     return str(round(value * 100, 2)) + " %"
 
 
-@register.filter()
+@register.filter(name='profit_in_percentage')
 def profit_in_percentage(value, arg):
     """Profit Percentage with % sign
 
@@ -76,7 +76,7 @@ def profit_in_percentage(value, arg):
     return str(round(val * 100, 2)) + " %"
 
 
-@register.filter()
+@register.filter(name='cal_width')
 def cal_width(value, max):
     """Get width
 
@@ -89,7 +89,7 @@ def cal_width(value, max):
     return width
 
 
-@register.filter()
+@register.filter(name='time_in_min')
 def time_in_min(value, arg):
     """Convert value in min or second format
 
@@ -118,7 +118,7 @@ def time_in_min(value, arg):
         return str("00:00 min")
 
 
-@register.filter()
+@register.filter(name='conv_min')
 def conv_min(value):
     """Convert value in min:sec format
 
@@ -138,7 +138,7 @@ def conv_min(value):
         return "00:00"
 
 
-@register.filter()
+@register.filter(name='month_name')
 def month_name(value, arg):
     """Get month name from 1-12 int no
 
@@ -154,7 +154,7 @@ def month_name(value, arg):
     return str(m_name) + " " + str(arg)
 
 
-@register.filter
+@register.filter(name='to_json')
 def to_json(value):
     return mark_safe(simplejson.dumps(value))
 
@@ -238,6 +238,9 @@ class FieldSetNode(template.Node):
         return u''
 
 
+class ArgumentError(ValueError):
+    """Missing or incompatible argument."""
+
 def _regroup_table(seq, rows=None, columns=None):
     if not (rows or columns):
         raise ArgumentError("Missing one of rows or columns")
@@ -251,7 +254,7 @@ def _regroup_table(seq, rows=None, columns=None):
     return [row + [None for x in range(n - len(row))] for row in table]
 
 
-@register.filter
+@register.filter(name='groupby_rows')
 def groupby_rows(seq, n):
     """Returns a list of n lists. Each sub-list is the same length.
 
@@ -264,7 +267,7 @@ def groupby_rows(seq, n):
     return _regroup_table(seq, rows=int(n))
 
 
-@register.filter
+@register.filter(name='groupby_columns')
 def groupby_columns(seq, n):
     """Returns a list of lists where each sub-list has n items.
 
@@ -302,15 +305,12 @@ def listsort(value):
     listsort.is_safe = True
 
 
-register.filter('mul', mul)
-register.filter('subtract', subtract)
-register.filter('div', div)
-register.filter('percent', percent)
-register.filter('profit_in_percentage', profit_in_percentage)
-register.filter('conv_min', conv_min)
-register.filter('time_in_min', time_in_min)
-register.filter('month_name', month_name)
-register.filter('cal_width', cal_width)
-register.filter('to_json', to_json)
-register.filter('groupby_rows', groupby_rows)
-register.filter('groupby_columns', groupby_columns)
+@register.filter(name='convert_to_int')
+def convert_to_int(val):
+    """
+    Return int value
+    """
+    try:
+        return int(val)
+    except:
+        return val
