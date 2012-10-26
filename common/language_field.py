@@ -11,8 +11,6 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 
-import os
-
 from django.utils.translation import ugettext as _
 from django.db import models
 from django.conf import settings
@@ -234,6 +232,7 @@ LANGUAGES = (
     ('zh', _('Chinese')),
     ('zu', _('Zulu')),
     )
+
 
 class LanguageField(models.CharField):
     """Stores language codes as defined by ISO 639-1"""
