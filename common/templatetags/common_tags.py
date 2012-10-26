@@ -11,9 +11,8 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 from django import template
-#TODO: Remove wildcard *
-from django.template.defaultfilters import *
 from django.utils import simplejson
+from django.utils.safestring import mark_safe
 from django.utils.datastructures import SortedDict
 import copy
 
