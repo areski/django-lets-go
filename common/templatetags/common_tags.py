@@ -231,8 +231,8 @@ class FieldSetNode(template.Node):
 
         form = template.Variable(self.form_variable).resolve(context)
         new_form = copy.copy(form)
-        new_form.fields = SortedDict([(key, value) \
-                for key, value in form.fields.items() if key in self.fields])
+        new_form.fields = SortedDict(
+            [(key, value) for key, value in form.fields.items() if key in self.fields])
 
         context[self.variable_name] = new_form
         return u''

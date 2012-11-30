@@ -33,20 +33,17 @@ class ForeignKeySearchInput(forms.HiddenInput):
 
     class Media:
         css = {
-            'all': ('%s%s/css/jquery.autocomplete.css'\
-                    % (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0])),
-            }
+            'all': ('%s%s/css/jquery.autocomplete.css'
+                % (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0])),
+        }
         js = (
             '%s%s/js/jquery-1.7.1.js' %
-                        (settings.STATIC_URL,
-                        settings.STATICFILES_DIRS[0][0]),
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
             '%s%s/js/jquery.autocomplete.js' %
-                        (settings.STATIC_URL,
-                        settings.STATICFILES_DIRS[0][0]),
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
             '%s%s/js/AutocompleteObjectLookups.js ' %
-                        (settings.STATIC_URL,
-                        settings.STATICFILES_DIRS[0][0]),
-            )
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
+        )
 
     def label_for_value(self, value):
         rel_name = self.search_fields[0].split('__')[0]
@@ -62,8 +59,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
     def render(self, name, value, attrs=None):
         if attrs is None:
             attrs = {}
-        rendered =\
-        super(ForeignKeySearchInput, self).render(name, value, attrs)
+        rendered = super(ForeignKeySearchInput, self).render(name, value, attrs)
         if value:
             label = self.label_for_value(value)
         else:
@@ -119,7 +115,7 @@ $("#lookup_%(name)s").autocomplete("../search/", {
             'label': label,
             'name': name,
             'value': value,
-            }
+        }
 
 
 class ManyToManySearchInput(forms.MultipleHiddenInput):
@@ -130,20 +126,17 @@ class ManyToManySearchInput(forms.MultipleHiddenInput):
 
     class Media:
         css = {
-            'all': ('%s%s/css/jquery.autocomplete.css'\
+            'all': ('%s%s/css/jquery.autocomplete.css'
                     % (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0])),
-            }
+        }
         js = (
             '%s%s/js/jquery-1.4.4.js' %
-                                (settings.STATIC_URL,
-                                settings.STATICFILES_DIRS[0][0]),
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
             '%s%s/js/jquery.autocomplete.js' %
-                                (settings.STATIC_URL,
-                                settings.STATICFILES_DIRS[0][0]),
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
             '%s%s/js/AutocompleteObjectLookups.js ' %
-                                (settings.STATIC_URL,
-                                settings.STATICFILES_DIRS[0][0]),
-            )
+            (settings.STATIC_URL, settings.STATICFILES_DIRS[0][0]),
+        )
 
     def __init__(self, rel, search_fields, attrs=None):
         self.rel = rel
@@ -178,7 +171,7 @@ class ManyToManySearchInput(forms.MultipleHiddenInput):
                 'label': getattr(obj, rel_name),
                 'name': name,
                 'value': obj.id,
-                }
+            }
         return mark_safe(u'''
 <input type="text" id="lookup_%(name)s" value="" size="40"/>%(label)s
 <div style="float:left; padding-left:105px; width:300px;">
@@ -250,7 +243,7 @@ $(document).ready(function(){
             'value': value,
             'selected': selected,
             'help_text': self.help_text,
-            }
+        }
 
 
 class AutocompleteModelAdmin(admin.ModelAdmin):
@@ -300,15 +293,15 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
 
             rel_name = field_name.split('__')[0]
 
-            data = ''.join([u'%s|%s\n' %\
-                            (getattr(f, rel_name), f.pk) for f in qs])
+            data = ''.join([u'%s|%s\n' %
+                (getattr(f, rel_name), f.pk) for f in qs])
             return HttpResponse(data)
         return HttpResponseNotFound()
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         # For ForeignKey use a special Autocomplete widget.
-        if isinstance(db_field, models.ForeignKey) and\
-           db_field.name in self.related_search_fields:
+        if (isinstance(db_field, models.ForeignKey) and
+           db_field.name in self.related_search_fields):
             kwargs['widget'] = ForeignKeySearchInput(db_field.rel,
                 self.related_search_fields[db_field.name])
 
@@ -323,15 +316,15 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
                 # formfield can be None if it came from a OneToOneField with
                 # parent_link=True
                 if formfield is not None:
-                    formfield.widget =\
-                    AutocompleteWidgetWrapper(formfield.widget,
+                    formfield.widget = AutocompleteWidgetWrapper(
+                        formfield.widget,
                         db_field.rel,
                         self.admin_site)
             return formfield
 
         # For ManyToManyField use a special Autocomplete widget.
-        if isinstance(db_field, models.ManyToManyField) and\
-           db_field.name in self.related_search_fields:
+        if (isinstance(db_field, models.ManyToManyField) and
+           db_field.name in self.related_search_fields):
             kwargs['widget'] = ManyToManySearchInput(db_field.rel,
                 self.related_search_fields[db_field.name])
             db_field.help_text = ''
@@ -347,14 +340,13 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
                 # formfield can be None if it came from a OneToOneField with
                 # parent_link=True
                 if formfield is not None:
-                    formfield.widget =\
-                    AutocompleteWidgetWrapper(formfield.widget,
+                    formfield.widget = AutocompleteWidgetWrapper(
+                        formfield.widget,
                         db_field.rel,
                         self.admin_site)
             return formfield
 
-        return super(AutocompleteModelAdmin, self)\
-        .formfield_for_dbfield(db_field, **kwargs)
+        return super(AutocompleteModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
     def response_add(self, request, obj, post_url_continue='../%s/'):
         """
@@ -364,13 +356,14 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
         pk_value = obj._get_pk_val()
 
         msg = _('The %(name)s "%(obj)s" was added.') %\
-              {'name': force_unicode(opts.verbose_name),
-              'obj': force_unicode(obj)}
+            {
+                'name': force_unicode(opts.verbose_name),
+                'obj': force_unicode(obj)
+            }
         # Here, we distinguish between different save types by checking for
         # the presence of keys in request.POST.
         if "_continue" in request.POST:
-            self.message_user(request, msg + ' '\
-            + _("You may edit it again below."))
+            self.message_user(request, msg + ' ' + _("You may edit it again below."))
             if "_popup" in request.POST:
                 post_url_continue += "?_popup=%s" % request.POST.get('_popup')
             return HttpResponseRedirect(post_url_continue % pk_value)
@@ -378,13 +371,12 @@ class AutocompleteModelAdmin(admin.ModelAdmin):
         if "_popup" in request.POST:
             #htturn response to Autocomplete PopUp
             if "_popup" in request.POST:
-                return HttpResponse('<script type="text/javascript">opener.dismissAutocompletePopup(window, "%s", "%s");</script>' %\
-                                    (escape(pk_value), escape(obj)))
+                return HttpResponse(
+                    '<script type="text/javascript">opener.dismissAutocompletePopup(window, "%s", "%s");</script>' % (escape(pk_value), escape(obj)))
 
         elif "_addanother" in request.POST:
-            self.message_user(request, msg + ' ' +\
-                                       (_("You may add another %s below.") %\
-                                        force_unicode(opts.verbose_name)))
+            self.message_user(request, msg + ' ' +
+                (_("You may add another %s below.") % force_unicode(opts.verbose_name)))
             return HttpResponseRedirect(request.path)
         else:
             self.message_user(request, msg)
@@ -403,8 +395,7 @@ class AutocompleteWidgetWrapper(RelatedFieldWidgetWrapper):
     def render(self, name, value, *args, **kwargs):
         rel_to = self.rel.to
         related_url = '../../../%s/%s/' %\
-                        (rel_to._meta.app_label,
-                        rel_to._meta.object_name.lower())
+            (rel_to._meta.app_label, rel_to._meta.object_name.lower())
         self.widget.choices = self.choices
         output = [self.widget.render(name, value, *args, **kwargs)]
         if rel_to in self.admin_site._registry:
@@ -412,8 +403,8 @@ class AutocompleteWidgetWrapper(RelatedFieldWidgetWrapper):
             # TODO: "id_" is hard-coded here.
             # This should instead use the correct
             # API to determine the ID dynamically.
-            output.append(u'<a href="%sadd/" class="add-another" id="add_id_%s" onclick="return showAutocompletePopup(this);"> ' %\
-                          (related_url, name))
-            output.append(u'<img src="%simg/admin/icon_addlink.gif" width="10" height="10" alt="%s"/></a>' %\
-                          (settings.ADMIN_MEDIA_PREFIX, _('Add Another')))
+            output.append(u'<a href="%sadd/" class="add-another" id="add_id_%s" onclick="return showAutocompletePopup(this);"> ' %
+                (related_url, name))
+            output.append(u'<img src="%simg/admin/icon_addlink.gif" width="10" height="10" alt="%s"/></a>' %
+                (settings.ADMIN_MEDIA_PREFIX, _('Add Another')))
         return mark_safe(u''.join(output))

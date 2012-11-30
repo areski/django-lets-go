@@ -37,8 +37,8 @@ def build_test_suite_from(test_cases):
         for item in mod.__dict__.values():
             if type(item) is type and issubclass(item, test_case):
                 tests.append(item)
-        test_suites.append(unittest.TestSuite(map(unittest.TestLoader().\
-        loadTestsFromTestCase, tests)))
+        test_suites.append(unittest.TestSuite(
+            map(unittest.TestLoader().loadTestsFromTestCase, tests)))
 
     return unittest.TestSuite(test_suites)
 
@@ -56,7 +56,7 @@ class BaseAuthenticatedClient(TestCase):
         auth = auth.strip()
         self.extra = {
             'HTTP_AUTHORIZATION': auth,
-            }
+        }
         login = self.client.login(username='admin', password='admin')
         self.assertTrue(login)
         self.factory = RequestFactory()
