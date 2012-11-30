@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+2.4.0 (2012-11-30)
+------------------
+
+* Add BigIntegerField - Field to provide BigInt for Mysql and PostgreSQL
+* PEP Fixes
+
+
 2.3.0 (2012-11-23)
 ------------------
 
