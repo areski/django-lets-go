@@ -1,10 +1,11 @@
 #code from http://loose-bits.com/2010/10/distributed-task-locking-in-celery.html
 
 import redis
+
 REDIS_CLIENT = redis.Redis()
 
 
-def only_one(function=None, key="", timeout=None):
+def only_one(function=None, ikey="", timeout=None):
     """Enforce only one celery task at a time."""
 
     def _dec(run_func):
@@ -14,6 +15,9 @@ def only_one(function=None, key="", timeout=None):
             """Caller."""
             ret_value = None
             have_lock = False
+            # for item in kwargs.iteritems():
+            #     print item
+            key = kwargs.pop('keytask', ikey)
             lock = REDIS_CLIENT.lock(key, timeout=timeout)
             try:
                 have_lock = lock.acquire(blocking=False)
