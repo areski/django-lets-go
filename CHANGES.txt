@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+2.4.1 (2013-02-10)
+------------------
+
+* Decorator only_one for celery can define the key from the calling method
+
+
 2.4.0 (2012-11-30)
 ------------------
 
