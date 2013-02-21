@@ -47,6 +47,8 @@ It contains the following helper mainly related to Django :
 
 6. LanguageField - Field to language list
 
+7. AppLabelRenamer Class for django admin UI
+
 
 Installation
 ------------
