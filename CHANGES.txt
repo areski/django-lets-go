@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+2.5.0 (2013-02-21)
+------------------
+
+* Add new AppLabelRenamer - Rename app label and app breadcrumbs in admin
+
+
 2.4.1 (2013-02-10)
 ------------------
 
