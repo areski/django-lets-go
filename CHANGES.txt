@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+
+2.6.0 (2013-02-22)
+------------------
+
+* Add export_as_csv_action - Admin custom action which returns an export csv
+
+
 2.5.0 (2013-02-21)
 ------------------
 
