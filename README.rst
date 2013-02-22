@@ -49,6 +49,8 @@ It contains the following helper mainly related to Django :
 
 7. AppLabelRenamer Class for django admin UI
 
+8. export_as_csv_action - Admin custom action which returns an export csv
+
 
 Installation
 ------------
