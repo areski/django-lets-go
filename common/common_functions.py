@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2012 Star2Billing S.L.
+# Copyright (C) 2011-2013 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
@@ -124,19 +124,19 @@ def comp_month_range():
     word_months = _("months")
     word_month = _("month")
     COMP_MONTH_LIST = (
-            (12, '- 12 ' + word_months),
-            (11, '- 11 ' + word_months),
-            (10, '- 10 ' + word_months),
-            (9, '- 9 ' + word_months),
-            (8, '- 8 ' + word_months),
-            (7, '- 7 ' + word_months),
-            (6, '- 6 ' + word_months),
-            (5, '- 5 ' + word_months),
-            (4, '- 4 ' + word_months),
-            (3, '- 3 ' + word_months),
-            (2, '- 2 ' + word_months),
-            (1, '- 1 ' + word_month),
-           )
+        (12, '- 12 ' + word_months),
+        (11, '- 11 ' + word_months),
+        (10, '- 10 ' + word_months),
+        (9, '- 9 ' + word_months),
+        (8, '- 8 ' + word_months),
+        (7, '- 7 ' + word_months),
+        (6, '- 6 ' + word_months),
+        (5, '- 5 ' + word_months),
+        (4, '- 4 ' + word_months),
+        (3, '- 3 ' + word_months),
+        (2, '- 2 ' + word_months),
+        (1, '- 1 ' + word_month),
+    )
     return COMP_MONTH_LIST
 
 
@@ -467,6 +467,8 @@ def get_pagination_vars(request, col_field_list, default_sort_field):
 
 
 def percentage(value, total_sum):
-    """To calculate percentage"""
-    return round(100 * float(value)/float(total_sum))
-
+    """calculate a percentage"""
+    if total_sum == 0:
+        return 0
+    else:
+        return round(100 * float(value) / float(total_sum))

@@ -71,7 +71,7 @@ License
 -------
 
 MPL V2.0 License
-Copyright (C) 2011-2012 Star2Billing S.L.
+Copyright (C) 2011-2013 Star2Billing S.L.
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
