@@ -464,3 +464,9 @@ def get_pagination_vars(request, col_field_list, default_sort_field):
         'sort_order': sort_order,
     }
     return data
+
+
+def percentage(value, total_sum):
+    """To calculate percentage"""
+    return round(100 * float(value)/float(total_sum))
+

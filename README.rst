@@ -29,6 +29,7 @@ It contains the following helper mainly related to Django :
     * ``get_news`` - Get news from news url
     * ``only_one`` - Decorator for distributed task locking in celery
     * ``ceil_strdate`` - Convert a string date to either a start or end day date
+    * ``percentage`` - Get percentage value
 
 4. Common Template tags :
 
