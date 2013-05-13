@@ -268,7 +268,10 @@ def get_news(news_url):
 
 #variable check with request
 def variable_value(request, field_name):
-    """Check field in POST/GET request and return field value"""
+    """Check field in POST/GET request and return field value
+
+    Depreciated : It will be replaced by getvar
+    """
     if request.method == 'GET':
         if field_name in request.GET:
             field_name = request.GET[field_name]
@@ -282,6 +285,29 @@ def variable_value(request, field_name):
             field_name = ''
 
     return field_name
+
+
+#Get variable from request
+def getvar(request, field_name, setsession=False):
+    """Check field in POST/GET request and return field value
+    if there is value you can also save a session variable
+    """
+    if request.method == 'GET':
+        if field_name in request.GET:
+            val = request.GET[field_name]
+        else:
+            val = ''
+
+    if request.method == 'POST':
+        if field_name in request.POST:
+            val = request.POST[field_name]
+        else:
+            val = ''
+
+    if setsession and val and val != '':
+        request.session['session_' + field_name] = val
+
+    return val
 
 
 #source_type/destination_type filed check with request

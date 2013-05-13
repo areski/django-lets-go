@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+2.7.1 (2013-05-13)
+------------------
+
+* new function getvar(request, field_name, setsession=False)
+    Check field in POST/GET request and return field value
+    if there is value you can also save a session variable
+
+
 2.7.0 (2013-05-02)
 ------------------
 
