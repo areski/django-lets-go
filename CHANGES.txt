@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+2.7.2 (2013-05-13)
+------------------
+
+* new function unset_session_var : Unset session variables
+
+
 2.7.1 (2013-05-13)
 ------------------
 
