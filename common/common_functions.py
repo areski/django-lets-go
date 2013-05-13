@@ -287,6 +287,17 @@ def variable_value(request, field_name):
     return field_name
 
 
+def unset_session_var(request, field_list):
+    """Unset session variables
+
+    field_list = ['destination', 'result']
+    unset_session_var(request, field_list)
+    """
+    for field in field_list:
+        request.session['session_' + field] = ''
+    return True
+
+
 #Get variable from request
 def getvar(request, field_name, setsession=False):
     """Check field in POST/GET request and return field value
