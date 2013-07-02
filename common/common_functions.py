@@ -84,9 +84,7 @@ def unique_list(inlist):
     >>> unique_list(inlist)
     [1, 2, 4, 5, 6]
     """
-    # order preserving
-    uniques = set(inlist)
-    return uniques
+    return set(inlist)
 
 
 def get_unique_id():
