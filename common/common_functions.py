@@ -84,12 +84,7 @@ def unique_list(inlist):
     >>> unique_list(inlist)
     [1, 2, 4, 5, 6]
     """
-    # order preserving
-    uniques = []
-    for item in inlist:
-        if item not in uniques:
-            uniques.append(item)
-    return uniques
+    return set(inlist)
 
 
 def get_unique_id():
@@ -188,10 +183,7 @@ def validate_days(year, month, day):
     31
     """
     total_days = calendar.monthrange(year, month)
-    if day > total_days[1]:
-        return total_days[1]
-    else:
-        return day
+    return ( total_days[1] if (day > total_days[1]) else day )
 
 
 def month_year_range(enter_date):
@@ -470,10 +462,7 @@ def get_pagination_vars(request, col_field_list, default_sort_field):
     """Return data for django pagination with sort order"""
     # Define no of records per page
     PAGE_SIZE = settings.PAGE_SIZE
-    try:
-        PAGE_NUMBER = int(request.GET['page'])
-    except:
-        PAGE_NUMBER = 1
+    PAGE_NUMBER = int(request.GET.get('page', 1))
 
     # page index
     if PAGE_NUMBER > 1:
