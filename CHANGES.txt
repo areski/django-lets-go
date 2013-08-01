@@ -7,7 +7,7 @@ Changelog
 * Add setting to ceil_strdate - hour_min support hours and minutes
 
 
-3.8.0 (2013-06-03)
+2.8.0 (2013-06-03)
 ------------------
 
 * Add constant EXPORT_CHOICE - Define list of format to export
