@@ -29,6 +29,10 @@ It contains the following helper mainly related to Django :
     * ``get_news`` - Get news from news url
     * ``only_one`` - Decorator for distributed task locking in celery
     * ``ceil_strdate`` - Convert a string date to either a start or end day date
+    * ``percentage`` - Get percentage value
+    * ``unset_session_var`` - Unset settion variable
+    * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can
+                   also save a session variable
 
 4. Common Template tags :
 
@@ -70,7 +74,7 @@ License
 -------
 
 MPL V2.0 License
-Copyright (C) 2011-2012 Star2Billing S.L.
+Copyright (C) 2011-2013 Star2Billing S.L.
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,

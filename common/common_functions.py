@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2012 Star2Billing S.L.
+# Copyright (C) 2011-2013 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
@@ -84,12 +84,7 @@ def unique_list(inlist):
     >>> unique_list(inlist)
     [1, 2, 4, 5, 6]
     """
-    # order preserving
-    uniques = []
-    for item in inlist:
-        if item not in uniques:
-            uniques.append(item)
-    return uniques
+    return set(inlist)
 
 
 def get_unique_id():
@@ -124,19 +119,19 @@ def comp_month_range():
     word_months = _("months")
     word_month = _("month")
     COMP_MONTH_LIST = (
-            (12, '- 12 ' + word_months),
-            (11, '- 11 ' + word_months),
-            (10, '- 10 ' + word_months),
-            (9, '- 9 ' + word_months),
-            (8, '- 8 ' + word_months),
-            (7, '- 7 ' + word_months),
-            (6, '- 6 ' + word_months),
-            (5, '- 5 ' + word_months),
-            (4, '- 4 ' + word_months),
-            (3, '- 3 ' + word_months),
-            (2, '- 2 ' + word_months),
-            (1, '- 1 ' + word_month),
-           )
+        (12, '- 12 ' + word_months),
+        (11, '- 11 ' + word_months),
+        (10, '- 10 ' + word_months),
+        (9, '- 9 ' + word_months),
+        (8, '- 8 ' + word_months),
+        (7, '- 7 ' + word_months),
+        (6, '- 6 ' + word_months),
+        (5, '- 5 ' + word_months),
+        (4, '- 4 ' + word_months),
+        (3, '- 3 ' + word_months),
+        (2, '- 2 ' + word_months),
+        (1, '- 1 ' + word_month),
+    )
     return COMP_MONTH_LIST
 
 
@@ -188,10 +183,7 @@ def validate_days(year, month, day):
     31
     """
     total_days = calendar.monthrange(year, month)
-    if day > total_days[1]:
-        return total_days[1]
-    else:
-        return day
+    return ( total_days[1] if (day > total_days[1]) else day )
 
 
 def month_year_range(enter_date):
@@ -268,7 +260,10 @@ def get_news(news_url):
 
 #variable check with request
 def variable_value(request, field_name):
-    """Check field in POST/GET request and return field value"""
+    """Check field in POST/GET request and return field value
+
+    Depreciated : It will be replaced by getvar
+    """
     if request.method == 'GET':
         if field_name in request.GET:
             field_name = request.GET[field_name]
@@ -282,6 +277,40 @@ def variable_value(request, field_name):
             field_name = ''
 
     return field_name
+
+
+def unset_session_var(request, field_list):
+    """Unset session variables
+
+    field_list = ['destination', 'result']
+    unset_session_var(request, field_list)
+    """
+    for field in field_list:
+        request.session['session_' + field] = ''
+    return True
+
+
+#Get variable from request
+def getvar(request, field_name, setsession=False):
+    """Check field in POST/GET request and return field value
+    if there is value you can also save a session variable
+    """
+    if request.method == 'GET':
+        if field_name in request.GET:
+            val = request.GET[field_name]
+        else:
+            val = ''
+
+    if request.method == 'POST':
+        if field_name in request.POST:
+            val = request.POST[field_name]
+        else:
+            val = ''
+
+    if setsession and val and val != '':
+        request.session['session_' + field_name] = val
+
+    return val
 
 
 #source_type/destination_type filed check with request
@@ -411,24 +440,29 @@ def isint(str):
     return ok
 
 
-def ceil_strdate(str_date, start):
+def ceil_strdate(str_date, start, hour_min=False):
     """convert a string date to either a start or end day date"""
     if start == 'start':
-        return datetime(int(str_date[0:4]), int(str_date[5:7]),
-            int(str_date[8:10]), 0, 0, 0, 0)
+        if hour_min:
+            return datetime(int(str_date[0:4]), int(str_date[5:7]),
+                int(str_date[8:10]), int(str_date[11:13]), int(str_date[14:16]), 0, 0)
+        else:
+            return datetime(int(str_date[0:4]), int(str_date[5:7]),
+                int(str_date[8:10]), 0, 0, 0, 0)
     else:
-        return datetime(int(str_date[0:4]), int(str_date[5:7]),
-            int(str_date[8:10]), 23, 59, 59, 999999)
+        if hour_min:
+            return datetime(int(str_date[0:4]), int(str_date[5:7]),
+                int(str_date[8:10]), int(str_date[11:13]), int(str_date[14:16]), 0, 0)
+        else:
+            return datetime(int(str_date[0:4]), int(str_date[5:7]),
+                int(str_date[8:10]), 23, 59, 59, 999999)
 
 
 def get_pagination_vars(request, col_field_list, default_sort_field):
     """Return data for django pagination with sort order"""
     # Define no of records per page
     PAGE_SIZE = settings.PAGE_SIZE
-    try:
-        PAGE_NUMBER = int(request.GET['page'])
-    except:
-        PAGE_NUMBER = 1
+    PAGE_NUMBER = int(request.GET.get('page', 1))
 
     # page index
     if PAGE_NUMBER > 1:
@@ -464,3 +498,11 @@ def get_pagination_vars(request, col_field_list, default_sort_field):
         'sort_order': sort_order,
     }
     return data
+
+
+def percentage(value, total_sum):
+    """calculate a percentage"""
+    if total_sum == 0:
+        return 0
+    else:
+        return round(100 * float(value) / float(total_sum))

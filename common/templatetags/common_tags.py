@@ -5,16 +5,16 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2012 Star2Billing S.L.
+# Copyright (C) 2011-2013 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
 #
 from django import template
-from django.utils import simplejson
 from django.utils.safestring import mark_safe
 from django.utils.datastructures import SortedDict
 import copy
+import json
 
 register = template.Library()
 
@@ -156,7 +156,7 @@ def month_name(value, arg):
 
 @register.filter(name='to_json')
 def to_json(value):
-    return mark_safe(simplejson.dumps(value))
+    return mark_safe(json.dumps(value))
 
 
 @register.inclusion_tag('sort_link_frag.html', takes_context=True)

@@ -1,6 +1,44 @@
 Changelog
 =========
 
+2.8.2 (2013-12-09)
+------------------
+
+* Support for Django 1.6
+
+
+2.8.1 (2013-06-03)
+------------------
+
+* Add setting to ceil_strdate - hour_min support hours and minutes
+
+
+2.8.0 (2013-06-03)
+------------------
+
+* Add constant EXPORT_CHOICE - Define list of format to export
+* Add class HorizRadioRenderer - This overrides widget method to put
+    radio buttons horizontally instead of vertically.
+
+
+2.7.2 (2013-05-13)
+------------------
+
+* new function unset_session_var : Unset session variables
+
+
+2.7.1 (2013-05-13)
+------------------
+
+* new function getvar(request, field_name, setsession=False)
+    Check field in POST/GET request and return field value
+    if there is value you can also save a session variable
+
+
+2.7.0 (2013-05-02)
+------------------
+
+* add percentage function - Get percentage value
 
 
 2.6.0 (2013-02-22)

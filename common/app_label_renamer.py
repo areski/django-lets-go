@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2012 Star2Billing S.L.
+# Copyright (C) 2011-2013 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
@@ -54,7 +54,7 @@ class AppLabelRenamer(object):
                 if model.__module__ != self.module:
                     continue
                 if admin_class is None:
-                    admin_class = type(model.__name__+'Admin', (admin.ModelAdmin,), {})
+                    admin_class = type(model.__name__ + 'Admin', (admin.ModelAdmin,), {})
                 admin_class.add_view = rename_breadcrumbs(admin_class.add_view)
                 admin_class.change_view = rename_breadcrumbs(admin_class.change_view)
                 admin_class.changelist_view = rename_breadcrumbs(admin_class.changelist_view)
