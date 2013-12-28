@@ -15,16 +15,20 @@ from django.db.models.base import ModelBase
 from django.core.urlresolvers import resolve
 
 
+#TODO: Follow evolution of https://code.djangoproject.com/ticket/3591
+
 # Source link : http://django-notes.blogspot.in/2011/07/django-app-name-breadcrumbs-l10n.html
 class AppLabelRenamer(object):
-    ''' Rename app label and app breadcrumbs in admin. '''
+    """
+    Rename app label and app breadcrumbs in admin
+    """
     def __init__(self, native_app_label, app_label):
         self.native_app_label = native_app_label
         self.app_label = app_label
         self.module = '.'.join([native_app_label, 'models'])
 
     class string_with_realoaded_title(str):
-        ''' tnx to Ionel Maries Cristian for http://ionelmc.wordpress.com/2011/06/24/custom-app-names-in-the-django-admin/'''
+        ''' thanks to Ionel Maries Cristian for http://ionelmc.wordpress.com/2011/06/24/custom-app-names-in-the-django-admin/'''
         def __new__(cls, value, title):
             instance = str.__new__(cls, value)
             instance._title = title
