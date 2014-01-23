@@ -47,6 +47,8 @@ It contains the following helper mainly related to Django :
     * ``listsort`` - Perform sorting on template list
     * ``convert_to_int`` - Convert value to interger
     * ``wordcap`` - Capitalizes the first character of each words.
+    * ``percentage_tag`` - get percentage value.
+
 
 5. build_test_suite_from : Returns a single or group of unittest test suite
 
