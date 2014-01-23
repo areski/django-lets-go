@@ -75,6 +75,15 @@ def subtract(value, arg):
     return value - arg
 
 
+@register.simple_tag(name='percentage_tag')
+def percentage_tag(fraction, population):
+    """Usage: {% percentage_tag fraction population %}"""
+    try:
+        return "%.2f%%" % ((float(fraction) / float(population)) * 100)
+    except:
+        return "0.00%"
+
+
 @register.filter(name='percent')
 def percent(value):
     """Percentage with % sign
