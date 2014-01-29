@@ -13,22 +13,11 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.datastructures import SortedDict
+from common.common_functions import word_capital
 import copy
 import json
 
 register = template.Library()
-
-
-def word_capital(text):
-    """
-    Capitalizes the first character of each word, it converts a string into
-    titlecase by making words start with an uppercase character and keep the
-    remaining characters.
-    """
-    if text and len(text) > 0:
-        return ' '.join([s[0].upper() + s[1:] for s in text.split(' ') if len(s) > 0])
-    else:
-        return text
 
 
 @register.filter(name='wordcap')

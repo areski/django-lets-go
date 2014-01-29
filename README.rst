@@ -31,8 +31,8 @@ It contains the following helper mainly related to Django :
     * ``ceil_strdate`` - Convert a string date to either a start or end day date
     * ``percentage`` - Get percentage value
     * ``unset_session_var`` - Unset settion variable
-    * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can
-                   also save a session variable
+    * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can also save a session variable
+    * ``word_capital`` -  Capitalizes the first character of each word
 
 4. Common Template tags :
 
