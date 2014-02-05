@@ -1,35 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 import re
-import common
+import django_lets_go
 
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
-README = read('README.rst')
-
-# Compile the list of packages available, because distutils doesn't have
-# an easy way to do this.
-packages, data_files = [], []
-root_dir = os.path.dirname(__file__)
-if root_dir:
-    os.chdir(root_dir)
-
-for dirpath, dirnames, filenames in os.walk('common'):
-    # Ignore dirnames that start with '.'
-    for i, dirname in enumerate(dirnames):
-        if dirname.startswith('.'):
-            del dirnames[i]
-    if '__init__.py' in filenames:
-        pkg = dirpath.replace(os.path.sep, '.')
-        if os.path.altsep:
-            pkg = pkg.replace(os.path.altsep, '.')
-        packages.append(pkg)
-    elif filenames:
-        prefix = dirpath[len('common') + 1:]  # Strip "common/"
-        for f in filenames:
-            data_files.append(os.path.join(prefix, f))
+def read(*parts):
+    return open(os.path.join(os.path.dirname(__file__), *parts)).read()
 
 
 def parse_requirements(file_name):
@@ -56,26 +32,25 @@ def parse_dependency_links(file_name):
 
 
 setup(
-    name='switch2bill-common',
-    version=common.__version__,
-    description='Common Django/Python helpers for Star2Billing projects',
-    long_description=README,
-    url='http://github.com/Star2Billing/switch2bill-common',
+    name='django-lets-go',
+    version=django_lets_go.__version__,
+    description='Django helpers, goodies, mix of snippets, etc...',
+    long_description=read('README.rst'),
+    url='http://github.com/areski/django-lets-go',
     author='Belaid Arezqui',
     author_email='areski@gmail.com',
-    license='MPL 2.0 License',
-    packages=packages,
-    package_dir={'common': 'common'},
-    package_data={'common': data_files},
-    entry_points={'django.apps': 'common = common'},
+    license='MIT License',
+    zip_safe=False,
+    packages=find_packages(exclude=["tests", "demoproject", "docs"]),
+    package_data={},
     install_requires=parse_requirements('requirements.txt'),
     dependency_links=parse_dependency_links('requirements.txt'),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
+        'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
-        'Environment :: Web Environment',
-        'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules'

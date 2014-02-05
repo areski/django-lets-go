@@ -1,5 +1,5 @@
 global-exclude *.pyc
 include README.rst
-include COPYING
+include MIT-LICENSE.txt
 include requirements.txt
-recursive-include common *.py
+recursive-include django_lets_go *.py
