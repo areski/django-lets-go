@@ -12,20 +12,20 @@ some are homemade used in our projects.
 Django-lets-gp contains the following helper :
 ----------------------------------------------
 
-Model
-~~~~~
+1. Model
+~~~~~~~~
 
 * intermediate_model_base_class
 
 
-Middleware
-~~~~~~~~~~
+2. Middleware
+~~~~~~~~~~~~~
 
 * FilterPersistMiddleware
 
 
-Functions
-~~~~~~~~~
+3. Functions
+~~~~~~~~~~~~
 
 * ``get_unique_code`` - Generate unique code
 * ``pass_gen`` - Unique password generator
@@ -42,8 +42,8 @@ Functions
 * ``word_capital`` -  Capitalizes the first character of each word
 
 
-Template tags
-~~~~~~~~~~~~~
+4. Template tags
+~~~~~~~~~~~~~~~~
 
 * ``time_in_min`` - Convert value in min:sec or seconds format
 * ``conv_min`` - Convert value in min:sec format
@@ -59,20 +59,20 @@ Template tags
 * ``percentage_tag`` - get percentage value.
 
 
-Test suite tools
-~~~~~~~~~~~~~~~~
-
-* build_test_suite_from : Returns a single or group of unittest test suite
-
-
-Fields
-~~~~~~
+5. Fields
+~~~~~~~~~
 
 * LanguageField - Field to language list
 
 
-Django Admin Class Helper
-~~~~~~~~~~~~~~~~~~~~~~~~~
+6. Test suite tools
+~~~~~~~~~~~~~~~~~~~
+
+* build_test_suite_from : Returns a single or group of unittest test suite
+
+
+7. Admin Class Helper
+~~~~~~~~~~~~~~~~~~~~~~
 
 * AppLabelRenamer Class for django admin UI
 
