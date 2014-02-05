@@ -5,14 +5,12 @@ Django Helper, Utils and mix of Snippets
 
 Django-Lets-go provide a set of helpers, goodies, functions used in a subset of their Open Source projects.
 
+This repository is full of goodies, some are useful snippets recompiled,
+some are homemade used in our projects.
 
-What can you find ?
--------------------
 
-This repository is full of goodies, some are useful snippets recompiled.
-
-It contains the following helper mainly related to Django :
-
+Django-lets-gp contains the following helper :
+----------------------------------------------
 
 Model
 ~~~~~
