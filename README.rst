@@ -31,8 +31,8 @@ It contains the following helper mainly related to Django :
     * ``ceil_strdate`` - Convert a string date to either a start or end day date
     * ``percentage`` - Get percentage value
     * ``unset_session_var`` - Unset settion variable
-    * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can
-                   also save a session variable
+    * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can also save a session variable
+    * ``word_capital`` -  Capitalizes the first character of each word
 
 4. Common Template tags :
 
@@ -46,6 +46,9 @@ It contains the following helper mainly related to Django :
     * ``groupby_rows`` - Returns a list of lists where each sub-list has n items.
     * ``listsort`` - Perform sorting on template list
     * ``convert_to_int`` - Convert value to interger
+    * ``wordcap`` - Capitalizes the first character of each words.
+    * ``percentage_tag`` - get percentage value.
+
 
 5. build_test_suite_from : Returns a single or group of unittest test suite
 
@@ -74,7 +77,7 @@ License
 -------
 
 MPL V2.0 License
-Copyright (C) 2011-2013 Star2Billing S.L.
+Copyright (C) 2011-2014 Star2Billing S.L.
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,

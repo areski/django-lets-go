@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2013 Star2Billing S.L.
+# Copyright (C) 2011-2014 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
@@ -13,10 +13,19 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.datastructures import SortedDict
+from common.common_functions import word_capital
 import copy
 import json
 
 register = template.Library()
+
+
+@register.filter(name='wordcap')
+def wordcap(value):
+    """
+    Capitalizes the first character of each words.
+    """
+    return word_capital(value)
 
 
 @register.filter(name='mul')
@@ -53,6 +62,15 @@ def subtract(value, arg):
     2
     """
     return value - arg
+
+
+@register.simple_tag(name='percentage_tag')
+def percentage_tag(fraction, population):
+    """Usage: {% percentage_tag fraction population %}"""
+    try:
+        return "%.2f%%" % ((float(fraction) / float(population)) * 100)
+    except:
+        return "0.00%"
 
 
 @register.filter(name='percent')

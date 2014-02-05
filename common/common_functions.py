@@ -5,7 +5,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this file,
 # You can obtain one at http://mozilla.org/MPL/2.0/.
 #
-# Copyright (C) 2011-2013 Star2Billing S.L.
+# Copyright (C) 2011-2014 Star2Billing S.L.
 #
 # The Initial Developer of the Original Code is
 # Arezqui Belaid <info@star2billing.com>
@@ -506,3 +506,15 @@ def percentage(value, total_sum):
         return 0
     else:
         return round(100 * float(value) / float(total_sum))
+
+
+def word_capital(text):
+    """
+    Capitalizes the first character of each word, it converts a string into
+    titlecase by making words start with an uppercase character and keep the
+    remaining characters.
+    """
+    if text and len(text) > 0:
+        return ' '.join([s[0].upper() + s[1:] for s in text.split(' ') if len(s) > 0])
+    else:
+        return text

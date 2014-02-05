@@ -1,6 +1,25 @@
 Changelog
 =========
 
+
+2.8.5 (2014-01-30)
+------------------
+
+* new template tag ``word_capital`` -  Capitalizes the first character of each word
+
+
+2.8.4 (2014-01-23)
+------------------
+
+* new template tag ``percentage`` - Get percentage value
+
+
+2.8.3 (2013-12-28)
+------------------
+
+* new template filter wordcap - Capitalizes the first character of each words.
+
+
 2.8.2 (2013-12-09)
 ------------------
 
