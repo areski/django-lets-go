@@ -6,8 +6,8 @@ Django-Lets-go provide a lot of goodies, functions, useful snippets recompiled,
 if you develop some Django projects you will certainly found something useful here.
 
 
-Django-lets-go contains the following helper :
-----------------------------------------------
+Django-lets-go contains the following :
+---------------------------------------
 
 1. Model
 ~~~~~~~~
