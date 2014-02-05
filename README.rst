@@ -1,4 +1,3 @@
-
 Django Helper, Utils and mix of Snippets
 ========================================
 
@@ -100,7 +99,7 @@ Projects using Django-lets-go
 Changelog
 ---------
 
-Changelog summary : https://github.com/areski/django-nvd3/blob/master/CHANGELOG.rst
+Changelog summary : https://github.com/areski/django-lets-go/blob/master/CHANGELOG.rst
 
 
 License
