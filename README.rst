@@ -13,11 +13,21 @@ This repository is full of goodies, some are useful snippets recompiled.
 
 It contains the following helper mainly related to Django :
 
-1. Model : intermediate_model_base_class
 
-2. FilterPersistMiddleware
+Model
+~~~~~
 
-3. Common functions :
+* intermediate_model_base_class
+
+
+Middleware
+~~~~~~~~~~
+
+* FilterPersistMiddleware
+
+
+Functions
+~~~~~~~~~
 
 * ``get_unique_code`` - Generate unique code
 * ``pass_gen`` - Unique password generator
@@ -33,7 +43,9 @@ It contains the following helper mainly related to Django :
 * ``getvar`` - Check field in POST/GET request and return field value. if there is value you can also save a session variable
 * ``word_capital`` -  Capitalizes the first character of each word
 
-4. Common Template tags :
+
+Template tags
+~~~~~~~~~~~~~
 
 * ``time_in_min`` - Convert value in min:sec or seconds format
 * ``conv_min`` - Convert value in min:sec format
@@ -49,13 +61,24 @@ It contains the following helper mainly related to Django :
 * ``percentage_tag`` - get percentage value.
 
 
-5. build_test_suite_from : Returns a single or group of unittest test suite
+Test suite tools
+~~~~~~~~~~~~~~~~
 
-6. LanguageField - Field to language list
+* build_test_suite_from : Returns a single or group of unittest test suite
 
-7. AppLabelRenamer Class for django admin UI
 
-8. export_as_csv_action - Admin custom action which returns an export csv
+Fields
+~~~~~~
+
+* LanguageField - Field to language list
+
+
+Django Admin Class Helper
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* AppLabelRenamer Class for django admin UI
+
+* export_as_csv_action - Admin custom action which returns an export csv
 
 
 Installation
