@@ -13,7 +13,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.datastructures import SortedDict
-from common.common_functions import word_capital
+from django_lets_go.common_functions import word_capital
 import copy
 import json
 
