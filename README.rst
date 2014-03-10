@@ -1,3 +1,4 @@
+
 Django Helper, Utils and mix of Snippets
 ========================================
 
@@ -105,5 +106,8 @@ Changelog summary : https://github.com/areski/django-lets-go/blob/master/CHANGEL
 License
 -------
 
-django-lets-go is licensed under MIT, see MIT-LICENSE.txt.
+Django-lets-go is licensed under `MIT`_
+
 The Initial Developer is Arezqui Belaid <areski@gmail.com>
+
+.. _`MIT`: https://github.com/areski/django-lets-go/blob/master/MIT-LICENSE.txt
