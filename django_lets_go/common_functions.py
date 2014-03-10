@@ -441,21 +441,20 @@ def isint(str):
 
 
 def ceil_strdate(str_date, start, hour_min=False):
-    """convert a string date to either a start or end day date"""
+    """
+    Convert a string date to either a start or end day date
+    """
     if start == 'start':
-        if hour_min:
-            return datetime(int(str_date[0:4]), int(str_date[5:7]),
-                int(str_date[8:10]), int(str_date[11:13]), int(str_date[14:16]), 0, 0)
-        else:
-            return datetime(int(str_date[0:4]), int(str_date[5:7]),
-                int(str_date[8:10]), 0, 0, 0, 0)
+        (hour, minute, second, millisec) = (0, 0, 0, 0)
     else:
-        if hour_min:
-            return datetime(int(str_date[0:4]), int(str_date[5:7]),
-                int(str_date[8:10]), int(str_date[11:13]), int(str_date[14:16]), 0, 0)
-        else:
-            return datetime(int(str_date[0:4]), int(str_date[5:7]),
-                int(str_date[8:10]), 23, 59, 59, 999999)
+        (hour, minute, second, millisec) = (23, 59, 59, 999999)
+    #if hour_min then we will retrieve them from str_date
+    if hour_min:
+        return datetime(int(str_date[0:4]), int(str_date[5:7]), int(str_date[8:10]),
+                        int(str_date[11:13]), int(str_date[14:16]), 0, 0)
+    else:
+        return datetime(int(str_date[0:4]), int(str_date[5:7]), int(str_date[8:10]), hour,
+                        minute, second, millisec)
 
 
 def get_pagination_vars(request, col_field_list, default_sort_field):
