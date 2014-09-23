@@ -14,7 +14,7 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 
-__version__ = "2.9.2"
+__version__ = '2.9.3'
 __author__ = "Arezqui Belaid"
 __contact__ = "info@star2billing.com"
 __homepage__ = "http://www.star2billing.com/"
