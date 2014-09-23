@@ -14,8 +14,7 @@
 # Arezqui Belaid <info@star2billing.com>
 #
 
-VERSION = (2, 9, 2, "")
-__version__ = ".".join(map(str, VERSION[0:3])) + "".join(VERSION[3:])
+__version__ = "2.9.2"
 __author__ = "Arezqui Belaid"
 __contact__ = "info@star2billing.com"
 __homepage__ = "http://www.star2billing.com/"

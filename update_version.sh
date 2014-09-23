@@ -1,10 +1,10 @@
 #
 # Usage:
-#   ./update_version.sh 0.6.2
+#   ./update_version.sh 2.9.3
 #
 
 git flow release start v$1
-sed -i -e "s/__version__ = '.*'/__version__ = '$1'/g" audiofield/__init__.py
+sed -i -e "s/__version__ = '.*'/__version__ = '$1'/g" django_lets_go/__init__.py
 #rm -rf docs/html
 #python setup.py develop
 #make docs
