@@ -12,7 +12,7 @@
 #
 from django import template
 from django.utils.safestring import mark_safe
-from django.utils.datastructures import SortedDict
+from collections import OrderedDict
 from django_lets_go.common_functions import word_capital
 import copy
 import json
@@ -249,7 +249,7 @@ class FieldSetNode(template.Node):
 
         form = template.Variable(self.form_variable).resolve(context)
         new_form = copy.copy(form)
-        new_form.fields = SortedDict(
+        new_form.fields = OrderedDict(
             [(key, value) for key, value in form.fields.items() if key in self.fields])
 
         context[self.variable_name] = new_form
@@ -309,7 +309,7 @@ def listsort(value):
     {'a': 1, 'b': 2, 'c': 3, 'd': 4}
     """
     if isinstance(value, dict):
-        new_dict = SortedDict()
+        new_dict = OrderedDict()
         key_list = value.keys()
         key_list.sort()
         for key in key_list:

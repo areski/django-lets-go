@@ -2,6 +2,18 @@ Changelog
 =========
 
 
+2.9.4 (2015-12-11)
+------------------
+
+* django SortedDict deprecated replace by OrderedDict
+
+
+2.9.3 (2014-09-23)
+------------------
+
+* use ugettext_lazy
+
+
 2.9.2 (2014-03-10)
 ------------------
 
