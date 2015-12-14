@@ -83,6 +83,5 @@ class Choice(object):
             for value, data in self._data:
                 yield value, data
 
-        @classmethod
         def get_value(self, key):
             return self._hash[key]
