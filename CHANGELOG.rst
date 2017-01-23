@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.9.6 (2017-01-23)
+------------------
+
+* Add a page size parameter to `get_pagination_vars`
+
+
 2.9.5 (2015-12-14)
 ------------------
 

@@ -38,8 +38,8 @@ def pass_gen(char_length, digit_length):
 
 
 def current_view(request):
-    #from inspect import getmodule
-    #name = getmodule(stack()[1][0]).__name__
+    # from inspect import getmodule
+    # name = getmodule(stack()[1][0]).__name__
     return stack()[1][3]
 
 
@@ -55,7 +55,7 @@ def striplist(l):
     return([x.strip() for x in l])
 
 
-#related to date manipulation
+# related to date manipulation
 def relative_days(from_day, from_year):
     """get relative days from day & year (with leap year check)
 
@@ -183,7 +183,7 @@ def validate_days(year, month, day):
     31
     """
     total_days = calendar.monthrange(year, month)
-    return ( total_days[1] if (day > total_days[1]) else day )
+    return (total_days[1] if (day > total_days[1]) else day)
 
 
 def month_year_range(enter_date):
@@ -258,7 +258,7 @@ def get_news(news_url):
     return news_final
 
 
-#variable check with request
+# variable check with request
 def variable_value(request, field_name):
     """Check field in POST/GET request and return field value
 
@@ -448,7 +448,7 @@ def ceil_strdate(str_date, start, hour_min=False):
         (hour, minute, second, millisec) = (0, 0, 0, 0)
     else:
         (hour, minute, second, millisec) = (23, 59, 59, 999999)
-    #if hour_min then we will retrieve them from str_date
+    # if hour_min then we will retrieve them from str_date
     if hour_min:
         return datetime(int(str_date[0:4]), int(str_date[5:7]), int(str_date[8:10]),
                         int(str_date[11:13]), int(str_date[14:16]), 0, 0)
@@ -457,10 +457,14 @@ def ceil_strdate(str_date, start, hour_min=False):
                         minute, second, millisec)
 
 
-def get_pagination_vars(request, col_field_list, default_sort_field):
+def get_pagination_vars(request, col_field_list, default_sort_field, param_page_size=None):
     """Return data for django pagination with sort order"""
     # Define no of records per page
-    PAGE_SIZE = settings.PAGE_SIZE
+    if param_page_size:
+        PAGE_SIZE = param_page_size
+    else:
+        PAGE_SIZE = settings.PAGE_SIZE
+
     PAGE_NUMBER = int(request.GET.get('page', 1))
 
     # page index

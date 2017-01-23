@@ -1,6 +1,6 @@
 #
 # Usage:
-#   ./update_version.sh 2.9.3
+#   ./update_version.sh 2.9.6
 #
 
 git flow release start v$1
